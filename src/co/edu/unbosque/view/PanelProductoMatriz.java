@@ -10,15 +10,15 @@ public class PanelProductoMatriz extends JPanel {
 
 	private final String COMANDO_CONFIRMAR = "CONFIRMAR2";
 
-	private PanelSeleccion1 panelSeleccion;
+	private PanelSeleccion panelSeleccion;
 
-	private PanelSeleccion2 panelSeleccion2;
+	private PanelSeleccion panelSeleccion2;
 
-	private PanelMatriz1 panelMatriz1;
+	private PanelMatriz panelMatriz1;
 
-	private PanelMatriz2 panelMatriz2;
+	private PanelMatriz panelMatriz2;
 
-	private PanelMatriz3 panelMatriz3;
+	private PanelMatriz panelMatriz3;
 
 	private JSplitPane splitPane;
 
@@ -30,11 +30,13 @@ public class PanelProductoMatriz extends JPanel {
 
 	public PanelProductoMatriz() {
 		setLayout(new GridLayout(1, 3));
-		panelSeleccion = new PanelSeleccion1();
-		panelSeleccion2 = new PanelSeleccion2();
-		panelMatriz1 = new PanelMatriz1();
-		panelMatriz2 = new PanelMatriz2();
-		panelMatriz3 = new PanelMatriz3();
+		panelSeleccion = new PanelSeleccion();
+		panelSeleccion.inicializarComponentes();
+		panelSeleccion2 = new PanelSeleccion();
+		panelSeleccion2.inicializarComponentes2();
+		panelMatriz1 = new PanelMatriz();
+		panelMatriz2 = new PanelMatriz();
+		panelMatriz3 = new PanelMatriz();
 		btnConfirmar = new JButton("Hallar Producto");
 		btnConfirmar.setActionCommand(COMANDO_CONFIRMAR);
 		splitPane = new JSplitPane();
@@ -57,70 +59,70 @@ public class PanelProductoMatriz extends JPanel {
 	/**
 	 * @return the panelSeleccion
 	 */
-	public PanelSeleccion1 getPanelSeleccion() {
+	public PanelSeleccion getPanelSeleccion() {
 		return panelSeleccion;
 	}
 
 	/**
 	 * @param panelSeleccion the panelSeleccion to set
 	 */
-	public void setPanelSeleccion(PanelSeleccion1 panelSeleccion) {
+	public void setPanelSeleccion(PanelSeleccion panelSeleccion) {
 		this.panelSeleccion = panelSeleccion;
 	}
 
 	/**
 	 * @return the panelSeleccion2
 	 */
-	public PanelSeleccion2 getPanelSeleccion2() {
+	public PanelSeleccion getPanelSeleccion2() {
 		return panelSeleccion2;
 	}
 
 	/**
 	 * @param panelSeleccion2 the panelSeleccion2 to set
 	 */
-	public void setPanelSeleccion2(PanelSeleccion2 panelSeleccion2) {
+	public void setPanelSeleccion2(PanelSeleccion panelSeleccion2) {
 		this.panelSeleccion2 = panelSeleccion2;
 	}
 
 	/**
 	 * @return the panelMatriz1
 	 */
-	public PanelMatriz1 getPanelMatriz1() {
+	public PanelMatriz getPanelMatriz1() {
 		return panelMatriz1;
 	}
 
 	/**
 	 * @param panelMatriz1 the panelMatriz1 to set
 	 */
-	public void setPanelMatriz1(PanelMatriz1 panelMatriz1) {
+	public void setPanelMatriz1(PanelMatriz panelMatriz1) {
 		this.panelMatriz1 = panelMatriz1;
 	}
 
 	/**
 	 * @return the panelMatriz2
 	 */
-	public PanelMatriz2 getPanelMatriz2() {
+	public PanelMatriz getPanelMatriz2() {
 		return panelMatriz2;
 	}
 
 	/**
 	 * @param panelMatriz2 the panelMatriz2 to set
 	 */
-	public void setPanelMatriz2(PanelMatriz2 panelMatriz2) {
+	public void setPanelMatriz2(PanelMatriz panelMatriz2) {
 		this.panelMatriz2 = panelMatriz2;
 	}
 
 	/**
 	 * @return the panelMatriz3
 	 */
-	public PanelMatriz3 getPanelMatriz3() {
+	public PanelMatriz getPanelMatriz3() {
 		return panelMatriz3;
 	}
 
 	/**
 	 * @param panelMatriz3 the panelMatriz3 to set
 	 */
-	public void setPanelMatriz3(PanelMatriz3 panelMatriz3) {
+	public void setPanelMatriz3(PanelMatriz panelMatriz3) {
 		this.panelMatriz3 = panelMatriz3;
 	}
 
@@ -185,7 +187,6 @@ public class PanelProductoMatriz extends JPanel {
 	 */
 	public String getCOMANDO_CONFIRMAR() {
 		return COMANDO_CONFIRMAR;
-	}
-	
+	}	
 	
 }

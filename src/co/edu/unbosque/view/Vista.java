@@ -40,7 +40,7 @@ public class Vista extends JFrame{
 		panelBotones.getBtnBinomio().addActionListener(controller);
 		panelProductoMatriz.getBtnConfirmar().addActionListener(controller);
 		panelProductoMatriz.getPanelSeleccion().getBtnConfirmar().addActionListener(controller);
-		panelProductoMatriz.getPanelSeleccion2().getBtnConfirmar().addActionListener(controller);
+		panelProductoMatriz.getPanelSeleccion2().getBtnConfirmar2().addActionListener(controller);
 
 	}
 	

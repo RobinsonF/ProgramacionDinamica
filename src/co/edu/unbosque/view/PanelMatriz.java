@@ -6,30 +6,33 @@ package co.edu.unbosque.view;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 /**
  * 
  * @author Jhoan Ricardo Cuevas Patinio, Robinson Jose Gutierrez Solano and Juan
  *         Felipe Rojas Rodriguez
  *
  */
-public class PanelMatriz2 extends JPanel {
-
+public class PanelMatriz extends JPanel {
+	
 	/**
 	 * Variable txtMatriz tipo JTextField.
 	 */
 	private JTextField[][] txtMatriz;
+	
+	private JLabel[][] labelMatriz;
+
 
 	/**
-	 * Constructor clase PanelMatriz2
+	 * Constructor clase PanelMatri1
 	 */
-	public PanelMatriz2() {
+	public PanelMatriz() {
 
 	}
-
+	
 	/**
 	 * Este método se encarga de limpiar todo el panel.
 	 */
@@ -37,11 +40,10 @@ public class PanelMatriz2 extends JPanel {
 		this.removeAll();
 		this.repaint();
 	}
-
+	
 	/**
 	 * Este método se encarga de inicializar los componentes del panel.
-	 * 
-	 * @param filas,    numero de filas del panel.
+	 * @param filas, numero de filas del panel.
 	 * @param columnas, numero de columnas del panel.
 	 */
 	public void inicializarCompentes(int filas, int columnas) {
@@ -58,10 +60,21 @@ public class PanelMatriz2 extends JPanel {
 			}
 		}
 	}
-
+	
+	public void inicializarCompentes2(int filas, int columnas) {
+		setLayout(new GridLayout(filas, columnas));
+		labelMatriz = new JLabel[filas][columnas];
+		
+		for (int i = 0; i < filas; i++) {
+			for (int j = 0; j < columnas; j++) {
+				labelMatriz[i][j] = new JLabel();
+				this.add(labelMatriz[i][j]);
+			}
+		}
+	}
+	
 	/**
 	 * Este método se encarga de verificar las entradas de la matriz.
-	 * 
 	 * @param entradas, entradas a verificar.
 	 * @return
 	 */
@@ -69,7 +82,7 @@ public class PanelMatriz2 extends JPanel {
 		boolean verificar = false;
 		for (int i = 0; i < entradas.length; i++) {
 			for (int j = 0; j < entradas[0].length; j++) {
-				if ("".equals(entradas[i][j].getText())) {
+				if("".equals(entradas[i][j].getText())) {
 					verificar = true;
 					break;
 				}
@@ -91,5 +104,20 @@ public class PanelMatriz2 extends JPanel {
 	public void setTxtMatriz(JTextField[][] txtMatriz) {
 		this.txtMatriz = txtMatriz;
 	}
+
+	/**
+	 * @return the labelMatriz
+	 */
+	public JLabel[][] getLabelMatriz() {
+		return labelMatriz;
+	}
+
+	/**
+	 * @param labelMatriz the labelMatriz to set
+	 */
+	public void setLabelMatriz(JLabel[][] labelMatriz) {
+		this.labelMatriz = labelMatriz;
+	}
+	
 
 }

@@ -67,7 +67,7 @@ public class Controller implements ActionListener {
 				vista.mostrarMensajeError("Lo siento se ha presentado un error");
 			}
 		}
-		if (comando.equals(vista.getPanelProductoMatriz().getPanelSeleccion2().getCOMMANDO_CONFIRMAR())) {
+		if (comando.equals(vista.getPanelProductoMatriz().getPanelSeleccion2().getCOMANDO_CONFIRMAR2())) {
 			try {
 				String[] entradas = vista.getPanelProductoMatriz().getPanelSeleccion2().verificarEntradas();
 				if (entradas[0].equals("0")) {
@@ -123,9 +123,9 @@ public class Controller implements ActionListener {
 						resultado = algoritmo.productoMatriz(matriz1, matriz2);
 
 						vista.getPanelProductoMatriz().getPanelMatriz3().limpiarPanel();
-						vista.getPanelProductoMatriz().getPanelMatriz3().inicializarCompentes(Integer.parseInt(fila1),
+						vista.getPanelProductoMatriz().getPanelMatriz3().inicializarCompentes2(Integer.parseInt(fila1),
 								Integer.parseInt(columna2));
-						JLabel[][] resultadoMatriz = vista.getPanelProductoMatriz().getPanelMatriz3().getTxtMatriz();
+						JLabel[][] resultadoMatriz = vista.getPanelProductoMatriz().getPanelMatriz3().getLabelMatriz();
 						Font font = new Font("SansSerif", Font.BOLD, 30);
 						for (int i = 0; i < Integer.parseInt(fila1); i++) {
 							for (int j = 0; j < Integer.parseInt(columna2); j++) {
@@ -138,7 +138,7 @@ public class Controller implements ActionListener {
 						}
 						vista.getPanelProductoMatriz().getSplitPane3()
 								.setRightComponent(vista.getPanelProductoMatriz().getPanelMatriz3());
-						vista.getPanelProductoMatriz().getPanelMatriz3().setTxtMatriz(resultadoMatriz);
+						vista.getPanelProductoMatriz().getPanelMatriz3().setLabelMatriz(resultadoMatriz);
 					} else {
 						vista.mostrarMensajeAdvertencia(
 								"Las matrices que acaba de ingresar no se pueden multiplicar, revise las dimensiones");
