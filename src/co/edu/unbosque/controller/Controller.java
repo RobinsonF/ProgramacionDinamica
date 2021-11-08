@@ -45,7 +45,7 @@ public class Controller implements ActionListener {
 			System.out.println("Tareas");
 		}
 		if (comando.equals(vista.getPanelBotones().getCOMANDO_BINOMIO())) {
-			System.out.println("Binomio");
+			vista.getSplitPane().setRightComponent(vista.getPanelCoeficienteBinomial());
 		}
 		if (comando.equals(vista.getPanelProductoMatriz().getPanelSeleccion().getCOMMANDO_CONFIRMAR())) {
 			try {

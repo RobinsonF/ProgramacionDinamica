@@ -13,6 +13,8 @@ public class Vista extends JFrame{
 	
 	private PanelProductoMatriz panelProductoMatriz;
 	
+	private PanelCoeficienteBinomial panelCoeficienteBinomial;
+	
 	private JSplitPane splitPane;
 	
 	public Vista(Controller controller) {
@@ -24,6 +26,7 @@ public class Vista extends JFrame{
 		this.setVisible(true);
 		panelBotones = new PanelBotones();
 		panelProductoMatriz = new PanelProductoMatriz();
+		panelCoeficienteBinomial = new PanelCoeficienteBinomial();
 		splitPane = new JSplitPane();
 		splitPane.setLeftComponent(panelBotones);
 		getContentPane().add(splitPane);
@@ -54,6 +57,21 @@ public class Vista extends JFrame{
 	
 	public void mostrarMensajeError(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+
+	/**
+	 * @return the panelCoeficienteBinomial
+	 */
+	public PanelCoeficienteBinomial getPanelCoeficienteBinomial() {
+		return panelCoeficienteBinomial;
+	}
+
+	/**
+	 * @param panelCoeficienteBinomial the panelCoeficienteBinomial to set
+	 */
+	public void setPanelCoeficienteBinomial(PanelCoeficienteBinomial panelCoeficienteBinomial) {
+		this.panelCoeficienteBinomial = panelCoeficienteBinomial;
 	}
 
 	/**
