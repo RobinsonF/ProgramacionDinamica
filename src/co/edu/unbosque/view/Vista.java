@@ -44,6 +44,7 @@ public class Vista extends JFrame{
 		panelProductoMatriz.getBtnConfirmar().addActionListener(controller);
 		panelProductoMatriz.getPanelSeleccion().getBtnConfirmar().addActionListener(controller);
 		panelProductoMatriz.getPanelSeleccion2().getBtnConfirmar2().addActionListener(controller);
+		panelCoeficienteBinomial.getBtnConfirmar().addActionListener(controller);
 
 	}
 	

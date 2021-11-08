@@ -90,6 +90,9 @@ public class Controller implements ActionListener {
 		if (comando.equals(vista.getPanelProductoMatriz().getCOMANDO_CONFIRMAR())) {
 			hallarProducto();
 		}
+		if (comando.equals(vista.getPanelCoeficienteBinomial().getCOMANDO_CB())) {
+			hallarCoeficienteBinomial();
+		}
 
 	}
 
@@ -154,6 +157,13 @@ public class Controller implements ActionListener {
 		} catch (Exception excepcion2) {
 			vista.mostrarMensajeError("Lo siento se ha presentado un error");
 		}
+	}
+	
+	public void hallarCoeficienteBinomial() {
+		int n = Integer.parseInt(vista.getPanelCoeficienteBinomial().getTxtNumero1().getText());
+		int k = Integer.parseInt(vista.getPanelCoeficienteBinomial().getTxtNumero2().getText());
+		int resultado = algoritmo.coefBin(n, k);
+		vista.mostrarMensajeInformacion(""+resultado);
 	}
 
 }

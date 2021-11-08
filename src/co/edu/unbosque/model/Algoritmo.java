@@ -9,7 +9,7 @@ public class Algoritmo {
 //----------------------------------------COEFICIENTES BINOMIALES--------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 
-	public static int coefBin(int num1, int num2) {
+	public int coefBin(int num1, int num2) {
 		int i, j;
 		int[][] tabla = new int[num1 + 1][num1 + 1];
 

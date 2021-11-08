@@ -11,6 +11,8 @@ import javax.swing.SwingConstants;
 
 public class PanelCoeficienteBinomial extends JPanel{
 	
+	private final String COMANDO_CB = "CB";
+
 	private JButton btnConfirmar;
 	private JLabel labelParentesis1;
 	private JLabel labelParentesis2;
@@ -40,6 +42,7 @@ public class PanelCoeficienteBinomial extends JPanel{
 		panel = new JPanel();
 		panelAll = new JPanel();
 		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setActionCommand(COMANDO_CB);
 		panelAll.add(panel);
 		panel.setLayout(new GridLayout(3, 1));
 		panel.add(txtNumero1);
@@ -137,4 +140,39 @@ public class PanelCoeficienteBinomial extends JPanel{
 		this.txtNumero2 = txtNumero2;
 	}
 
+	/**
+	 * @return the btnConfirmar
+	 */
+	public JButton getBtnConfirmar() {
+		return btnConfirmar;
+	}
+
+	/**
+	 * @param btnConfirmar the btnConfirmar to set
+	 */
+	public void setBtnConfirmar(JButton btnConfirmar) {
+		this.btnConfirmar = btnConfirmar;
+	}
+
+	/**
+	 * @return the panelAll
+	 */
+	public JPanel getPanelAll() {
+		return panelAll;
+	}
+
+	/**
+	 * @param panelAll the panelAll to set
+	 */
+	public void setPanelAll(JPanel panelAll) {
+		this.panelAll = panelAll;
+	}
+
+	/**
+	 * @return the cOMANDO_CB
+	 */
+	public String getCOMANDO_CB() {
+		return COMANDO_CB;
+	}
+	
 }
