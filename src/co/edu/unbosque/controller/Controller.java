@@ -160,10 +160,27 @@ public class Controller implements ActionListener {
 	}
 	
 	public void hallarCoeficienteBinomial() {
-		int n = Integer.parseInt(vista.getPanelCoeficienteBinomial().getTxtNumero1().getText());
-		int k = Integer.parseInt(vista.getPanelCoeficienteBinomial().getTxtNumero2().getText());
-		int resultado = algoritmo.coefBin(n, k);
-		vista.mostrarMensajeInformacion(""+resultado);
+		
+		try {
+			String[] entradas = vista.getPanelCoeficienteBinomial().verificarEntradas();
+			if (entradas[0].equals("0")) {
+				String n = entradas[1];
+				algoritmo.verificarNumero(n);
+				String k = entradas[2];
+				algoritmo.verificarNumero(k);
+				int resultado = algoritmo.coefBin(Integer.parseInt(n), Integer.parseInt(k));
+				vista.getPanelCoeficienteBinomial().getTxtNumero1().setText("");
+				vista.getPanelCoeficienteBinomial().getTxtNumero2().setText("");
+				vista.mostrarMensajeInformacion(""+resultado);
+				
+			} else {
+				vista.mostrarMensajeAdvertencia(entradas[1]);
+			}
+		} catch (ExcepcionNumero excepcion) {
+			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
+		} catch (Exception excepcion2) {
+			vista.mostrarMensajeError("Lo siento se ha presentado un error");
+		}	
 	}
-
+	
 }

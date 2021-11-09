@@ -55,6 +55,24 @@ public class PanelCoeficienteBinomial extends JPanel{
 		add(panelAll);
 		add(btnConfirmar);
 	}
+	
+	/**
+	 * Este método se encarga de verificar las entradas de las dimensiones de la
+	 * matriz. @return, retorna las entradas validad o con su respectivo mensaje de
+	 * advertencia.
+	 */
+	public String[] verificarEntradas() {
+		String[] salidas = new String[3];
+		salidas[0] = "0";
+		if (!"".equals(txtNumero1.getText()) && !"".equals(txtNumero2.getText())) {
+			salidas[1] = txtNumero1.getText();
+			salidas[2] = txtNumero2.getText();
+		} else {
+			salidas[0] = "1";
+			salidas[1] = "Por favor ingrese los valores del coeficiente binomial bobo setenta hijueputa";
+		}
+		return salidas;
+	}
 
 	/**
 	 * @return the labelParentesis1
