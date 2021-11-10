@@ -101,37 +101,49 @@ public class Controller implements ActionListener {
 			hallarCoeficienteBinomial();
 		}
 		if (comando.equals(vista.getPanelViajero().getPanelSeleccionViajero().getCOMANDO_CONFIRMAR())) {
-			vista.getPanelViajero().getPanelMatriz().limpiarPanel();
-			int cantidadCiudades = Integer
-					.parseInt(vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText());
-			String[] nombreCiudades = new String[cantidadCiudades + 1];
-			int i = 1;
-			while (i <= cantidadCiudades) {
-				nombreCiudades[i] = vista.pedirDato("Ingrese el nombre de la ciudad numero: " + i);
-				i++;
-			}
-			vista.getPanelViajero().getPanelMatriz().inicializarCompentes(cantidadCiudades + 1, cantidadCiudades + 1);
-			JTextField[][] matriz = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
-			matriz[0][0].setEnabled(false);
-			for (int j = 1; j < cantidadCiudades + 1; j++) {
-				matriz[0][j].setText(nombreCiudades[j]);
-				matriz[0][j].setEnabled(false);
-			}
-			for (int j = 1; j < cantidadCiudades + 1; j++) {
-				matriz[j][0].setText(nombreCiudades[j]);
-				matriz[j][0].setEnabled(false);
-			}
-			for (int i2 = 1; i2 < cantidadCiudades + 1; i2++) {
-				for (int j = 1; j < matriz.length; j++) {
-					if (i2 == j) {
-						matriz[i2][j].setText("0");
-						matriz[i2][j].setEnabled(false);
+			try {
+				String[] entradas = vista.getPanelViajero().getPanelSeleccionViajero().verificarEntradas();
+				if (entradas[0].equals("0")) {
+					vista.getPanelViajero().getPanelMatriz().limpiarPanel();
+					algoritmo.verificarNumero(
+							vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText());
+					algoritmo.verificarNumero(entradas[1]);
+					int cantidadCiudades = Integer.parseInt(entradas[1]);
+					String[] nombreCiudades = new String[cantidadCiudades + 1];
+					int i = 1;
+					while (i <= cantidadCiudades) {
+						nombreCiudades[i] = vista.pedirDato("Ingrese el nombre de la ciudad numero: " + i);
+						i++;
 					}
+					vista.getPanelViajero().getPanelMatriz().inicializarCompentes(cantidadCiudades + 1,
+							cantidadCiudades + 1);
+					JTextField[][] matriz = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
+					matriz[0][0].setEnabled(false);
+					for (int j = 1; j < cantidadCiudades + 1; j++) {
+						matriz[0][j].setText(nombreCiudades[j]);
+						matriz[0][j].setEnabled(false);
+					}
+					for (int j = 1; j < cantidadCiudades + 1; j++) {
+						matriz[j][0].setText(nombreCiudades[j]);
+						matriz[j][0].setEnabled(false);
+					}
+					for (int i2 = 1; i2 < cantidadCiudades + 1; i2++) {
+						for (int j = 1; j < matriz.length; j++) {
+							if (i2 == j) {
+								matriz[i2][j].setText("0");
+								matriz[i2][j].setEnabled(false);
+							}
 
+						}
+					}
+					vista.getPanelViajero().getPanelMatriz().setTxtMatriz(matriz);
+					vista.getPanelViajero().getSplitPane().setRightComponent(vista.getPanelViajero().getPanel());
+				} else {
+					vista.mostrarMensajeInformacion(entradas[1]);
 				}
+			} catch (ExcepcionNumero excepcion) {
+				vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 			}
-			vista.getPanelViajero().getPanelMatriz().setTxtMatriz(matriz);
-			vista.getPanelViajero().getSplitPane().setRightComponent(vista.getPanelViajero().getPanel());
 		}
 		if (comando.equals(vista.getPanelFloyd().getPanelSeleccionFloyd().getCOMANDO_CONFIRMAR())) {
 			vista.getPanelFloyd().getPanelMatriz().limpiarPanel();
@@ -164,7 +176,7 @@ public class Controller implements ActionListener {
 		if (comando.equals(vista.getPanelFloyd().getCOMANDO_CONFIRMAR())) {
 			hallarFloyd();
 		}
-		
+
 		if (comando.equals(vista.getPanelViajero().getCOMANDO_CONFIRMAR())) {
 			hallarViajero();
 		}
@@ -271,39 +283,47 @@ public class Controller implements ActionListener {
 	}
 
 	public void hallarViajero() {
-		JTextField matriz[][] = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
-		String[] ciudades = new String[matriz.length];
-		for (int i = 0; i < matriz.length; i++) {
-			ciudades[i] = matriz[0][i].getText();
-		}
-		int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
-		for (int i = 1; i < matriz.length; i++) {
-			for (int j = 1; j < matriz.length; j++) {
-				if (!matriz[i][j].getText().equals("")) {
-					matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
-				} else {
-					matrizRecorridos[i - 1][j - 1] = 0;
+		try {
+			if (!"".equals(vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText())) {
+				JTextField matriz[][] = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
+				String[] ciudades = new String[matriz.length];
+				for (int i = 0; i < matriz.length; i++) {
+					ciudades[i] = matriz[0][i].getText();
 				}
-			}
-		}
-		for (int i = 0; i < matrizRecorridos.length; i++) {
-			for (int j = 0; j < matrizRecorridos.length; j++) {
-				if (i != j && matrizRecorridos[i][j] == 0) {
-					matrizRecorridos[i][j] = 99999999;
+				int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
+				for (int i = 1; i < matriz.length; i++) {
+					for (int j = 1; j < matriz.length; j++) {
+						if (!matriz[i][j].getText().equals("")) {
+							algoritmo.verificarNumero(matriz[i][j].getText());
+							matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
+						} else {
+							matrizRecorridos[i - 1][j - 1] = 0;
+						}
+					}
 				}
-			}
-		}
-	
-		Vendedor vendedor = new Vendedor(matrizRecorridos, ciudades.length-1, Estimacion.AJUSTADA);
-		vendedor.inciaVenta();
-		vista.mostrarMensajeInformacion("Coste mejor " + vendedor.getCosteMejor());
-		String camino = "";
-		String[] solucionMejor = vendedor.getSolMejor().split(",");
-		for (int i = 0; i < solucionMejor.length; i++) {
-			camino += ciudades[Integer.parseInt(solucionMejor[i])+1] + ",";
-		}
-		vista.mostrarMensajeInformacion("Mejor ruta " + camino);
+				for (int i = 0; i < matrizRecorridos.length; i++) {
+					for (int j = 0; j < matrizRecorridos.length; j++) {
+						if (i != j && matrizRecorridos[i][j] == 0) {
+							matrizRecorridos[i][j] = 99999999;
+						}
+					}
+				}
 
+				Vendedor vendedor = new Vendedor(matrizRecorridos, ciudades.length - 1, Estimacion.AJUSTADA);
+				vendedor.inciaVenta();
+				vista.mostrarMensajeInformacion("Coste mejor " + vendedor.getCosteMejor());
+				String camino = "";
+				String[] solucionMejor = vendedor.getSolMejor().split(",");
+				for (int i = 0; i < solucionMejor.length; i++) {
+					camino += ciudades[Integer.parseInt(solucionMejor[i]) + 1] + ",";
+				}
+				vista.mostrarMensajeInformacion("Mejor ruta " + camino);
+			} else {
+				vista.mostrarMensajeInformacion("Ingrese el número de ciudades");
+			}
+		} catch (ExcepcionNumero excepcion) {
+			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
+		}
 	}
 
 	public void hallarCoeficienteBinomial() {

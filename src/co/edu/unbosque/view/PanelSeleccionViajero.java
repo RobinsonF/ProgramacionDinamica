@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PanelSeleccionViajero extends JPanel{
-	
+public class PanelSeleccionViajero extends JPanel {
+
 	private final String COMANDO_CONFIRMAR = "CONFIRMAR3";
-	
+
 	private JLabel labelNumCiudad;
 	private JTextField txtNumCiudad;
 	private JButton btnConfirmar;
-	
+
 	public PanelSeleccionViajero() {
 		setLayout(new GridLayout(3, 1));
 		labelNumCiudad = new JLabel("Ingrese el número de ciudades");
@@ -24,6 +24,24 @@ public class PanelSeleccionViajero extends JPanel{
 		add(labelNumCiudad);
 		add(txtNumCiudad);
 		add(btnConfirmar);
+	}
+
+	public String[] verificarEntradas() {
+		String[] salidas = new String[2];
+		salidas[0] = "0";
+		if (!"".equals(txtNumCiudad.getText())) {
+			if (!"0".equals(txtNumCiudad.getText())) {
+				salidas[1] = txtNumCiudad.getText();
+			} else {
+				salidas[0] = "1";
+				salidas[1] = "El número de ciudades tiene que ser mayor a cero";
+			}
+		} else {
+			salidas[0] = "1";
+			salidas[1] = "Por favor ingrese un número de ciudades";
+		}
+		
+		return salidas;
 	}
 
 	/**
