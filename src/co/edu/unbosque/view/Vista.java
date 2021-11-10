@@ -17,6 +17,8 @@ public class Vista extends JFrame{
 	
 	private PanelViajero panelViajero;
 	
+	private PanelFloyd panelFloyd;
+	
 	private JSplitPane splitPane;
 	
 	public Vista(Controller controller) {
@@ -30,6 +32,7 @@ public class Vista extends JFrame{
 		panelProductoMatriz = new PanelProductoMatriz();
 		panelCoeficienteBinomial = new PanelCoeficienteBinomial();
 		panelViajero = new PanelViajero();
+		panelFloyd = new PanelFloyd();
 		splitPane = new JSplitPane();
 		splitPane.setLeftComponent(panelBotones);
 		getContentPane().add(splitPane);
@@ -50,6 +53,8 @@ public class Vista extends JFrame{
 		panelCoeficienteBinomial.getBtnConfirmar().addActionListener(controller);
 		panelViajero.getPanelSeleccionViajero().getBtnConfirmar().addActionListener(controller);
 		panelViajero.getBtnConfirmar().addActionListener(controller);
+		panelFloyd.getPanelSeleccionFloyd().getBtnConfirmar().addActionListener(controller);
+		panelFloyd.getBtnConfirmar().addActionListener(controller);
 
 	}
 	
@@ -139,5 +144,15 @@ public class Vista extends JFrame{
 	public void setPanelViajero(PanelViajero panelViajero) {
 		this.panelViajero = panelViajero;
 	}
+
+	public PanelFloyd getPanelFloyd() {
+		return panelFloyd;
+	}
+
+	public void setPanelFloyd(PanelFloyd panelFloyd) {
+		this.panelFloyd = panelFloyd;
+	}
+	
+	
 	
 }
