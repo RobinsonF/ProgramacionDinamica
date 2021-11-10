@@ -245,9 +245,9 @@ public class Vendedor {
 	public String getSolMejor() {
 		String cad = "";
 		for (int i = 0; i < n; i++){
-			cad += ", " + Integer.toString(solMejor[i]);
+			cad += Integer.toString(solMejor[i]) + ",";
 		}
-		return cad.replaceFirst(", ", "");
+		return cad;
 	}
 	
 	public int costeDelCaminoEncontrado(){

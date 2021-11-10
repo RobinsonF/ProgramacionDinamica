@@ -21,6 +21,8 @@ public class Vista extends JFrame{
 	
 	private JSplitPane splitPane;
 	
+	private JPanel panel;
+	
 	public Vista(Controller controller) {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(900, 400);
@@ -34,7 +36,9 @@ public class Vista extends JFrame{
 		panelViajero = new PanelViajero();
 		panelFloyd = new PanelFloyd();
 		splitPane = new JSplitPane();
+		panel = new JPanel();
 		splitPane.setLeftComponent(panelBotones);
+		splitPane.setRightComponent(panel);
 		getContentPane().add(splitPane);
 		asignarOyentes(controller);
 		repaint();

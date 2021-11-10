@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -12,7 +13,9 @@ import javax.swing.SwingConstants;
 
 import co.edu.unbosque.model.Algoritmo;
 import co.edu.unbosque.model.ExcepcionNumero;
+import co.edu.unbosque.model.Vendedor;
 import co.edu.unbosque.view.Vista;
+import co.edu.unbosque.model.Estimacion;
 
 public class Controller implements ActionListener {
 
@@ -98,6 +101,7 @@ public class Controller implements ActionListener {
 			hallarCoeficienteBinomial();
 		}
 		if (comando.equals(vista.getPanelViajero().getPanelSeleccionViajero().getCOMANDO_CONFIRMAR())) {
+			vista.getPanelViajero().getPanelMatriz().limpiarPanel();
 			int cantidadCiudades = Integer
 					.parseInt(vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText());
 			String[] nombreCiudades = new String[cantidadCiudades + 1];
@@ -119,7 +123,7 @@ public class Controller implements ActionListener {
 			}
 			for (int i2 = 1; i2 < cantidadCiudades + 1; i2++) {
 				for (int j = 1; j < matriz.length; j++) {
-					if (i == j) {
+					if (i2 == j) {
 						matriz[i2][j].setText("0");
 						matriz[i2][j].setEnabled(false);
 					}
@@ -159,6 +163,10 @@ public class Controller implements ActionListener {
 		}
 		if (comando.equals(vista.getPanelFloyd().getCOMANDO_CONFIRMAR())) {
 			hallarFloyd();
+		}
+		
+		if (comando.equals(vista.getPanelViajero().getCOMANDO_CONFIRMAR())) {
+			hallarViajero();
 		}
 
 	}
@@ -240,7 +248,7 @@ public class Controller implements ActionListener {
 		}
 		for (int i = 0; i < matrizRecorridos.length; i++) {
 			for (int j = 0; j < matrizRecorridos.length; j++) {
-				if(i!=j && matrizRecorridos[i][j]==0) {
+				if (matrizRecorridos[i][j] == 0) {
 					matrizRecorridos[i][j] = 99999999;
 				}
 			}
@@ -251,14 +259,50 @@ public class Controller implements ActionListener {
 			vista.mostrarMensajeAdvertencia("El recorrido es 0 porque el nodo de inicio y el nodo final son el mismo.");
 		} else {
 			int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
-			if( matrizRecorridosCortos[inicio - 1][fin - 1] ==99999999 ) {
+			if (matrizRecorridosCortos[inicio - 1][fin - 1] == 99999999) {
 				vista.mostrarMensajeError("Los nodos no cuentan con algún camino que los una.");
-			}else {
-				vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto " + fin + " es: "
-						+ matrizRecorridosCortos[inicio - 1][fin - 1]);
+			} else {
+				vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto " + fin
+						+ " es: " + matrizRecorridosCortos[inicio - 1][fin - 1]);
 			}
-			
+
 		}
+
+	}
+
+	public void hallarViajero() {
+		JTextField matriz[][] = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
+		String[] ciudades = new String[matriz.length];
+		for (int i = 0; i < matriz.length; i++) {
+			ciudades[i] = matriz[0][i].getText();
+		}
+		int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
+		for (int i = 1; i < matriz.length; i++) {
+			for (int j = 1; j < matriz.length; j++) {
+				if (!matriz[i][j].getText().equals("")) {
+					matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
+				} else {
+					matrizRecorridos[i - 1][j - 1] = 0;
+				}
+			}
+		}
+		for (int i = 0; i < matrizRecorridos.length; i++) {
+			for (int j = 0; j < matrizRecorridos.length; j++) {
+				if (i != j && matrizRecorridos[i][j] == 0) {
+					matrizRecorridos[i][j] = 99999999;
+				}
+			}
+		}
+	
+		Vendedor vendedor = new Vendedor(matrizRecorridos, ciudades.length-1, Estimacion.AJUSTADA);
+		vendedor.inciaVenta();
+		vista.mostrarMensajeInformacion("Coste mejor " + vendedor.getCosteMejor());
+		String camino = "";
+		String[] solucionMejor = vendedor.getSolMejor().split(",");
+		for (int i = 0; i < solucionMejor.length; i++) {
+			camino += ciudades[Integer.parseInt(solucionMejor[i])+1] + ",";
+		}
+		vista.mostrarMensajeInformacion("Mejor ruta " + camino);
 
 	}
 
