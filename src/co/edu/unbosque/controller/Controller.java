@@ -36,7 +36,7 @@ public class Controller implements ActionListener {
 			System.out.println("Floyd");
 		}
 		if (comando.equals(vista.getPanelBotones().getCOMANDO_VIAJERO())) {
-			System.out.println("Viajero");
+			vista.getSplitPane().setRightComponent(vista.getPanelViajero());
 		}
 		if (comando.equals(vista.getPanelBotones().getCOMANDO_MATRICES())) {
 			vista.getSplitPane().setRightComponent(vista.getPanelProductoMatriz());
@@ -92,6 +92,28 @@ public class Controller implements ActionListener {
 		}
 		if (comando.equals(vista.getPanelCoeficienteBinomial().getCOMANDO_CB())) {
 			hallarCoeficienteBinomial();
+		}
+		if(comando.equals(vista.getPanelViajero().getPanelSeleccionViajero().getCOMANDO_CONFIRMAR())) {
+			int cantidadCiudades = Integer.parseInt(vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText());
+			String[] nombreCiudades = new String[cantidadCiudades+1];
+			int i = 1;
+			while(i <= cantidadCiudades) {
+				nombreCiudades[i] = vista.pedirDato("Ingrese el nombre de la ciudad numero: " + i);
+				i++;
+			}
+			vista.getPanelViajero().getPanelMatriz().inicializarCompentes(cantidadCiudades+1, cantidadCiudades+1);
+			JTextField[][] matriz = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
+			matriz[0][0].setEnabled(false);
+			for (int j = 1; j < cantidadCiudades+1; j++) {
+				matriz[0][j].setText(nombreCiudades[j]);
+				matriz[0][j].setEnabled(false);
+			}
+			for (int j = 1; j < cantidadCiudades+1; j++) {
+				matriz[j][0].setText(nombreCiudades[j]);
+				matriz[j][0].setEnabled(false);
+			}
+			vista.getPanelViajero().getPanelMatriz().setTxtMatriz(matriz);
+			vista.getPanelViajero().getSplitPane().setRightComponent(vista.getPanelViajero().getPanel());
 		}
 
 	}
