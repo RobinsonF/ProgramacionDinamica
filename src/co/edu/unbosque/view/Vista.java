@@ -7,22 +7,22 @@ import javax.swing.JSplitPane;
 
 import co.edu.unbosque.controller.Controller;
 
-public class Vista extends JFrame{
-	
+public class Vista extends JFrame {
+
 	private PanelBotones panelBotones;
-	
+
 	private PanelProductoMatriz panelProductoMatriz;
-	
+
 	private PanelCoeficienteBinomial panelCoeficienteBinomial;
-	
+
 	private PanelViajero panelViajero;
-	
+
 	private PanelFloyd panelFloyd;
-	
+
 	private JSplitPane splitPane;
-	
+
 	private JPanel panel;
-	
+
 	public Vista(Controller controller) {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(900, 400);
@@ -44,7 +44,7 @@ public class Vista extends JFrame{
 		repaint();
 		revalidate();
 	}
-	
+
 	public void asignarOyentes(Controller controller) {
 		panelBotones.getBtnFloyd().addActionListener(controller);
 		panelBotones.getBtnViajero().addActionListener(controller);
@@ -61,23 +61,29 @@ public class Vista extends JFrame{
 		panelFloyd.getBtnConfirmar().addActionListener(controller);
 
 	}
-	
+
 	public void mostrarMensajeAdvertencia(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Mensaje de advertencia", JOptionPane.WARNING_MESSAGE);
 	}
-	
+
 	public void mostrarMensajeInformacion(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void mostrarMensajeError(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	public String pedirDato(String mensaje) {
-		return JOptionPane.showInputDialog(mensaje);
+		String n = JOptionPane.showInputDialog(mensaje);
+
+		if (n == null) {
+			n = "Accion Cancelada";
+		}else if("".equals(n)) {
+			n = "Por favor digite un valor";
+		}
+		return n;
 	}
-	
 
 	/**
 	 * @return the panelCoeficienteBinomial
@@ -156,7 +162,5 @@ public class Vista extends JFrame{
 	public void setPanelFloyd(PanelFloyd panelFloyd) {
 		this.panelFloyd = panelFloyd;
 	}
-	
-	
-	
+
 }

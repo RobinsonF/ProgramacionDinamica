@@ -25,6 +25,25 @@ public class PanelSeleccionFloyd extends JPanel{
 		add(txtNumNodos);
 		add(btnConfirmar);
 	}
+	
+	public String[] verificarEntradas() {
+		String[] salidas = new String[2];
+		salidas[0] = "0";
+		if (!"".equals(txtNumNodos.getText())) {
+			if (!"0".equals(txtNumNodos.getText())) {
+				salidas[1] = txtNumNodos.getText();
+			}else {
+				
+				salidas[0] = "1";
+				salidas[1] = "El número de nodos tiene que ser mayor a cero";
+			}
+		} else {
+			salidas[0] = "1";
+			salidas[1] = "Por favor ingrese un número de nodos";
+		}
+		
+		return salidas;
+	}
 
 	/**
 	 * @return the labelNumCiudad

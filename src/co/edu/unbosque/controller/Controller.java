@@ -101,12 +101,12 @@ public class Controller implements ActionListener {
 			hallarCoeficienteBinomial();
 		}
 		if (comando.equals(vista.getPanelViajero().getPanelSeleccionViajero().getCOMANDO_CONFIRMAR())) {
+
 			try {
 				String[] entradas = vista.getPanelViajero().getPanelSeleccionViajero().verificarEntradas();
 				if (entradas[0].equals("0")) {
+
 					vista.getPanelViajero().getPanelMatriz().limpiarPanel();
-					algoritmo.verificarNumero(
-							vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText());
 					algoritmo.verificarNumero(entradas[1]);
 					int cantidadCiudades = Integer.parseInt(entradas[1]);
 					String[] nombreCiudades = new String[cantidadCiudades + 1];
@@ -145,34 +145,52 @@ public class Controller implements ActionListener {
 				vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 			}
 		}
+
 		if (comando.equals(vista.getPanelFloyd().getPanelSeleccionFloyd().getCOMANDO_CONFIRMAR())) {
-			vista.getPanelFloyd().getPanelMatriz().limpiarPanel();
-			int cantidadNodos = Integer
-					.parseInt(vista.getPanelFloyd().getPanelSeleccionFloyd().getTxtNumNodos().getText());
-			vista.getPanelFloyd().getPanelMatriz().inicializarCompentes(cantidadNodos + 1, cantidadNodos + 1);
-			JTextField[][] matriz = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
-			matriz[0][0].setEnabled(false);
-			for (int j = 1; j < cantidadNodos + 1; j++) {
-				matriz[0][j].setText("" + j);
-				matriz[0][j].setEnabled(false);
-			}
-			for (int j = 1; j < cantidadNodos + 1; j++) {
-				matriz[j][0].setText("" + j);
-				matriz[j][0].setEnabled(false);
-			}
-			for (int i = 1; i < cantidadNodos + 1; i++) {
-				for (int j = 1; j < matriz.length; j++) {
-					if (i == j) {
-						matriz[i][j].setText("0");
-						matriz[i][j].setEnabled(false);
+
+			try {
+
+				String[] alCantidadNodos = vista.getPanelFloyd().getPanelSeleccionFloyd().verificarEntradas();
+
+				if (alCantidadNodos[0].equals("0")) {
+
+					vista.getPanelFloyd().getPanelMatriz().limpiarPanel();
+					algoritmo.verificarNumero(alCantidadNodos[1]);
+					int cantidadNodos = Integer.parseInt(alCantidadNodos[1]);
+
+					vista.getPanelFloyd().getPanelMatriz().inicializarCompentes(cantidadNodos + 1, cantidadNodos + 1);
+					JTextField[][] matriz = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
+					matriz[0][0].setEnabled(false);
+					for (int j = 1; j < cantidadNodos + 1; j++) {
+						matriz[0][j].setText("" + j);
+						matriz[0][j].setEnabled(false);
+					}
+					for (int j = 1; j < cantidadNodos + 1; j++) {
+						matriz[j][0].setText("" + j);
+						matriz[j][0].setEnabled(false);
+					}
+					for (int i = 1; i < cantidadNodos + 1; i++) {
+						for (int j = 1; j < matriz.length; j++) {
+							if (i == j) {
+								matriz[i][j].setText("0");
+								matriz[i][j].setEnabled(false);
+							}
+						}
 					}
 
+					vista.getPanelFloyd().getPanelMatriz().setTxtMatriz(matriz);
+					vista.getPanelFloyd().getSplitPane().setRightComponent(vista.getPanelFloyd().getPanel());
+
+				} else {
+					vista.mostrarMensajeInformacion(alCantidadNodos[1]);
 				}
+
+			} catch (ExcepcionNumero excepcion) {
+				vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 			}
 
-			vista.getPanelFloyd().getPanelMatriz().setTxtMatriz(matriz);
-			vista.getPanelFloyd().getSplitPane().setRightComponent(vista.getPanelFloyd().getPanel());
 		}
+
 		if (comando.equals(vista.getPanelFloyd().getCOMANDO_CONFIRMAR())) {
 			hallarFloyd();
 		}
@@ -247,39 +265,92 @@ public class Controller implements ActionListener {
 	}
 
 	public void hallarFloyd() {
-		JTextField matriz[][] = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
-		int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
-		for (int i = 1; i < matriz.length; i++) {
-			for (int j = 1; j < matriz.length; j++) {
-				if (!matriz[i][j].getText().equals("")) {
-					matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
+
+		try {
+			JTextField matriz[][] = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
+			int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
+			for (int i = 1; i < matriz.length; i++) {
+				for (int j = 1; j < matriz.length; j++) {
+					if (!matriz[i][j].getText().equals("")) {
+						algoritmo.verificarNumero2(matriz[i][j].getText());
+						matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
+					} else {
+						matrizRecorridos[i - 1][j - 1] = 0;
+					}
+				}
+			}
+			for (int i = 0; i < matrizRecorridos.length; i++) {
+				for (int j = 0; j < matrizRecorridos.length; j++) {
+					if (matrizRecorridos[i][j] == 0) {
+						matrizRecorridos[i][j] = 99999999;
+					}
+				}
+			}
+
+			boolean v = false;
+			int inicio = 0;
+			int fin = 0;
+			do {
+				String inicio2 = vista.pedirDato("Ingrese el punto de partida: ");
+				if (!"Accion Cancelada".equals(inicio2)) {
+					if(!"Por favor digite un valor".equals(inicio2)) {
+						algoritmo.verificarNumero(inicio2);
+						inicio = Integer.parseInt(inicio2);
+							if (inicio <= (matriz.length-1) && inicio >= 1) {
+								v = true;
+							}
+						if (!v) {
+							vista.mostrarMensajeInformacion("El punto de partida registrado no existe");
+						}
+					}
 				} else {
-					matrizRecorridos[i - 1][j - 1] = 0;
+					vista.mostrarMensajeInformacion(inicio2);
+					break;
 				}
-			}
-		}
-		for (int i = 0; i < matrizRecorridos.length; i++) {
-			for (int j = 0; j < matrizRecorridos.length; j++) {
-				if (matrizRecorridos[i][j] == 0) {
-					matrizRecorridos[i][j] = 99999999;
-				}
-			}
-		}
-		int inicio = Integer.parseInt(vista.pedirDato("Ingrese el punto de partida: "));
-		int fin = Integer.parseInt(vista.pedirDato("Ingrese el punto final: "));
-		if (inicio == fin) {
-			vista.mostrarMensajeAdvertencia("El recorrido es 0 porque el nodo de inicio y el nodo final son el mismo.");
-		} else {
-			int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
-			if (matrizRecorridosCortos[inicio - 1][fin - 1] == 99999999) {
-				vista.mostrarMensajeError("Los nodos no cuentan con algún camino que los una.");
-			} else {
-				vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto " + fin
-						+ " es: " + matrizRecorridosCortos[inicio - 1][fin - 1]);
+			} while (!v);
+			
+			if(v) {
+				v = false;
+
+				do {
+					String fin2 = vista.pedirDato("Ingrese el punto final: ");
+					if (!"Accion Cancelada".equals(fin2)) {
+						if(!"Por favor digite un valor".equals(fin2)) {
+							algoritmo.verificarNumero(fin2);
+							fin = Integer.parseInt(fin2);
+								if (fin <= (matriz.length-1) && fin >= 1) {
+									v = true;
+								}
+							if (!v) {
+								vista.mostrarMensajeInformacion("El punto final registrado no existe");
+							}
+						}
+					} else {
+						vista.mostrarMensajeInformacion(fin2);
+						break;
+					}
+				} while (!v);
 			}
 
-		}
+			if (v) {
 
+				if (inicio == fin) {
+					vista.mostrarMensajeAdvertencia(
+							"El recorrido es 0 porque el nodo de inicio y el nodo final son el mismo.");
+				} else {
+					int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
+					if (matrizRecorridosCortos[inicio - 1][fin - 1] == 99999999) {
+						vista.mostrarMensajeError("Los nodos no cuentan con algún camino que los una.");
+					} else {
+						vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto "
+								+ fin + " es: " + matrizRecorridosCortos[inicio - 1][fin - 1]);
+					}
+				}
+			}
+
+		} catch (ExcepcionNumero excepcion) {
+			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
+		}
 	}
 
 	public void hallarViajero() {

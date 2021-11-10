@@ -5,7 +5,7 @@ public class Algoritmo {
 	public Algoritmo() {
 
 	}
-	
+
 //----------------------------------------FLOYD-----------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 	public static int[][] rutasCortas(int[][] adj) {
@@ -31,7 +31,7 @@ public class Algoritmo {
 			}
 		}
 	}
-	
+
 //--------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------COEFICIENTES BINOMIALES--------------------------------------------------------
@@ -43,9 +43,9 @@ public class Algoritmo {
 
 		if (k == 0 || k == n) {
 			return 1;
-		} else if(k > n){
+		} else if (k > n) {
 			return 0;
-		}else {
+		} else {
 			for (i = 0; i <= n; i++) {
 				tabla[i][0] = 1;
 			}
@@ -150,16 +150,33 @@ public class Algoritmo {
 		for (int i = 0; i < numero.length(); i++) {
 			char aux = numero.charAt(i);
 			int digito = aux - '0';
+			if (digito > 9 || digito < 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean soloNumeros2(String numero) {
+		for (int i = 0; i < numero.length(); i++) {
+			char aux = numero.charAt(i);
+			int digito = aux - '0';
 			if (digito > 9) {
 				return false;
 			}
 		}
 		return true;
 	}
+	
+	public void verificarNumero2(String numero) throws ExcepcionNumero {
+		if (!soloNumeros2(numero)) {
+			throw new ExcepcionNumero("Caracter Invalido");
+		}
+	}
 
 	public void verificarNumero(String numero) throws ExcepcionNumero {
 		if (!soloNumeros(numero)) {
-			throw new ExcepcionNumero("Solo se permiten ingresar números, verifique los campos");
+			throw new ExcepcionNumero("Caracter Invalido");
 		}
 	}
 }
