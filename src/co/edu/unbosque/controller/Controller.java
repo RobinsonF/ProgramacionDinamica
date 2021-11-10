@@ -267,85 +267,89 @@ public class Controller implements ActionListener {
 	public void hallarFloyd() {
 
 		try {
-			JTextField matriz[][] = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
-			int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
-			for (int i = 1; i < matriz.length; i++) {
-				for (int j = 1; j < matriz.length; j++) {
-					if (!matriz[i][j].getText().equals("")) {
-						algoritmo.verificarNumero2(matriz[i][j].getText());
-						matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
-					} else {
-						matrizRecorridos[i - 1][j - 1] = 0;
+			if (!"".equals(vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText())) {
+				JTextField matriz[][] = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
+				int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
+				for (int i = 1; i < matriz.length; i++) {
+					for (int j = 1; j < matriz.length; j++) {
+						if (!matriz[i][j].getText().equals("")) {
+							algoritmo.verificarNumero2(matriz[i][j].getText());
+							matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
+						} else {
+							matrizRecorridos[i - 1][j - 1] = 0;
+						}
 					}
 				}
-			}
-			for (int i = 0; i < matrizRecorridos.length; i++) {
-				for (int j = 0; j < matrizRecorridos.length; j++) {
-					if (matrizRecorridos[i][j] == 0) {
-						matrizRecorridos[i][j] = 99999999;
+				for (int i = 0; i < matrizRecorridos.length; i++) {
+					for (int j = 0; j < matrizRecorridos.length; j++) {
+						if (matrizRecorridos[i][j] == 0) {
+							matrizRecorridos[i][j] = 99999999;
+						}
 					}
 				}
-			}
 
-			boolean v = false;
-			int inicio = 0;
-			int fin = 0;
-			do {
-				String inicio2 = vista.pedirDato("Ingrese el punto de partida: ");
-				if (!"Accion Cancelada".equals(inicio2)) {
-					if(!"Por favor digite un valor".equals(inicio2)) {
-						algoritmo.verificarNumero(inicio2);
-						inicio = Integer.parseInt(inicio2);
-							if (inicio <= (matriz.length-1) && inicio >= 1) {
+				boolean v = false;
+				int inicio = 0;
+				int fin = 0;
+				do {
+					String inicio2 = vista.pedirDato("Ingrese el punto de partida: ");
+					if (!"Accion Cancelada".equals(inicio2)) {
+						if (!"Por favor digite un valor".equals(inicio2)) {
+							algoritmo.verificarNumero(inicio2);
+							inicio = Integer.parseInt(inicio2);
+							if (inicio <= (matriz.length - 1) && inicio >= 1) {
 								v = true;
 							}
-						if (!v) {
-							vista.mostrarMensajeInformacion("El punto de partida registrado no existe");
-						}
-					}
-				} else {
-					vista.mostrarMensajeInformacion(inicio2);
-					break;
-				}
-			} while (!v);
-			
-			if(v) {
-				v = false;
-
-				do {
-					String fin2 = vista.pedirDato("Ingrese el punto final: ");
-					if (!"Accion Cancelada".equals(fin2)) {
-						if(!"Por favor digite un valor".equals(fin2)) {
-							algoritmo.verificarNumero(fin2);
-							fin = Integer.parseInt(fin2);
-								if (fin <= (matriz.length-1) && fin >= 1) {
-									v = true;
-								}
 							if (!v) {
-								vista.mostrarMensajeInformacion("El punto final registrado no existe");
+								vista.mostrarMensajeInformacion("El punto de partida registrado no existe");
 							}
 						}
 					} else {
-						vista.mostrarMensajeInformacion(fin2);
+						vista.mostrarMensajeInformacion(inicio2);
 						break;
 					}
 				} while (!v);
-			}
 
-			if (v) {
+				if (v) {
+					v = false;
 
-				if (inicio == fin) {
-					vista.mostrarMensajeAdvertencia(
-							"El recorrido es 0 porque el nodo de inicio y el nodo final son el mismo.");
-				} else {
-					int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
-					if (matrizRecorridosCortos[inicio - 1][fin - 1] == 99999999) {
-						vista.mostrarMensajeError("Los nodos no cuentan con algún camino que los una.");
+					do {
+						String fin2 = vista.pedirDato("Ingrese el punto final: ");
+						if (!"Accion Cancelada".equals(fin2)) {
+							if (!"Por favor digite un valor".equals(fin2)) {
+								algoritmo.verificarNumero(fin2);
+								fin = Integer.parseInt(fin2);
+								if (fin <= (matriz.length - 1) && fin >= 1) {
+									v = true;
+								}
+								if (!v) {
+									vista.mostrarMensajeInformacion("El punto final registrado no existe");
+								}
+							}
+						} else {
+							vista.mostrarMensajeInformacion(fin2);
+							break;
+						}
+					} while (!v);
+				}
+
+				if (v) {
+
+					if (inicio == fin) {
+						vista.mostrarMensajeAdvertencia(
+								"El recorrido es 0 porque el nodo de inicio y el nodo final son el mismo.");
 					} else {
-						vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto "
-								+ fin + " es: " + matrizRecorridosCortos[inicio - 1][fin - 1]);
+						int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
+						if (matrizRecorridosCortos[inicio - 1][fin - 1] == 99999999) {
+							vista.mostrarMensajeError("Los nodos no cuentan con algún camino que los una.");
+						} else {
+							vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto "
+									+ fin + " es: " + matrizRecorridosCortos[inicio - 1][fin - 1]);
+						}
 					}
 				}
+			} else {
+				vista.mostrarMensajeInformacion("Ingrese el número de nodos");
 			}
 
 		} catch (ExcepcionNumero excepcion) {
