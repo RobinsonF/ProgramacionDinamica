@@ -12,6 +12,7 @@ public class PanelFloyd extends JPanel{
 
 	private PanelSeleccionFloyd panelSeleccionFloyd;
 	private PanelMatriz panelMatriz;
+	private PanelMatriz panelMatriz1;
 	private JButton btnConfirmar;
 	private JSplitPane splitPane;
 	private JPanel panel;
@@ -20,6 +21,7 @@ public class PanelFloyd extends JPanel{
 		setLayout(new GridLayout(1, 1));
 		panelSeleccionFloyd = new PanelSeleccionFloyd();
 		panelMatriz = new PanelMatriz();
+		panelMatriz1 = new PanelMatriz();
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setActionCommand(COMANDO_CONFIRMAR);
 		panel = new JPanel();
@@ -31,6 +33,22 @@ public class PanelFloyd extends JPanel{
 		splitPane.setRightComponent(panel);
 		add(splitPane);
 	}
+	
+	/**
+	 * @return the panelMatriz1
+	 */
+	public PanelMatriz getPanelMatriz1() {
+		return panelMatriz1;
+	}
+
+	/**
+	 * @param panelMatriz1 the panelMatriz1 to set
+	 */
+	public void setPanelMatriz1(PanelMatriz panelMatriz1) {
+		this.panelMatriz1 = panelMatriz1;
+	}
+
+
 
 	/**
 	 * @return the panelSeleccionViajero

@@ -1,11 +1,13 @@
 package co.edu.unbosque.view;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class PanelSeleccionFloyd extends JPanel{
 	
@@ -17,8 +19,11 @@ public class PanelSeleccionFloyd extends JPanel{
 	
 	public PanelSeleccionFloyd() {
 		setLayout(new GridLayout(3, 1));
+		Font font = new Font("SansSerif", Font.BOLD, 30);
 		labelNumNodos = new JLabel("Ingrese el número de nodos");
 		txtNumNodos = new JTextField();
+		txtNumNodos.setFont(font);
+		txtNumNodos.setHorizontalAlignment(SwingConstants.CENTER);
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setActionCommand(COMANDO_CONFIRMAR);
 		add(labelNumNodos);

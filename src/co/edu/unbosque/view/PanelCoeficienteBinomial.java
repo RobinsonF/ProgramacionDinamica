@@ -25,6 +25,7 @@ public class PanelCoeficienteBinomial extends JPanel{
 	public PanelCoeficienteBinomial() {
 		setLayout(new GridLayout(2,1));
 		Font font = new Font("SansSerif", Font.BOLD, 150);
+		Font font2 = new Font("SansSerif", Font.BOLD, 30);
 		labelParentesis1 = new JLabel("(");
 		labelParentesis1.setFont(font);
 		labelParentesis1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -38,7 +39,11 @@ public class PanelCoeficienteBinomial extends JPanel{
 		labelDivisor.setHorizontalAlignment(SwingConstants.CENTER);
 		labelDivisor.setVerticalAlignment(SwingConstants.CENTER);
 		txtNumero1 = new JTextField();
+		txtNumero1.setFont(font2);
+		txtNumero1.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNumero2 = new JTextField();
+		txtNumero2.setFont(font2);
+		txtNumero2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel = new JPanel();
 		panelAll = new JPanel();
 		btnConfirmar = new JButton("Confirmar");

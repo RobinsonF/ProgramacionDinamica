@@ -1,5 +1,6 @@
 package co.edu.unbosque.view;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -7,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class PanelProductoMatriz extends JPanel {
 
@@ -20,8 +22,12 @@ public class PanelProductoMatriz extends JPanel {
 
 	public PanelProductoMatriz() {
 		setLayout(new GridLayout(3, 1));
+		Font font = new Font("SansSerif", Font.BOLD, 30);
 		labelNumMatriz = new JLabel("Ingrese el número de matrices");
+		labelNumMatriz.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNumMatriz = new JTextField();
+		txtNumMatriz.setFont(font);
+		txtNumMatriz.setHorizontalAlignment(SwingConstants.CENTER);
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setActionCommand(COMANDO_CONFIRMAR);
 		add(labelNumMatriz);

@@ -18,6 +18,8 @@ public class Vista extends JFrame {
 	private PanelViajero panelViajero;
 
 	private PanelFloyd panelFloyd;
+	
+	private PanelTareas panelTareas;
 
 	private JSplitPane splitPane;
 
@@ -35,6 +37,7 @@ public class Vista extends JFrame {
 		panelCoeficienteBinomial = new PanelCoeficienteBinomial();
 		panelViajero = new PanelViajero();
 		panelFloyd = new PanelFloyd();
+		panelTareas = new PanelTareas();
 		splitPane = new JSplitPane();
 		panel = new JPanel();
 		splitPane.setLeftComponent(panelBotones);
@@ -57,9 +60,10 @@ public class Vista extends JFrame {
 		panelViajero.getBtnConfirmar().addActionListener(controller);
 		panelFloyd.getPanelSeleccionFloyd().getBtnConfirmar().addActionListener(controller);
 		panelFloyd.getBtnConfirmar().addActionListener(controller);
+		panelTareas.getBtnConfirmar().addActionListener(controller);
 
 	}
-
+	
 	public void mostrarMensajeAdvertencia(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Mensaje de advertencia", JOptionPane.WARNING_MESSAGE);
 	}
@@ -74,13 +78,27 @@ public class Vista extends JFrame {
 
 	public String pedirDato(String mensaje) {
 		String n = JOptionPane.showInputDialog(mensaje);
-
 		if (n == null) {
 			n = "Accion Cancelada";
 		}else if("".equals(n)) {
 			n = "Por favor digite un valor";
 		}
 		return n;
+	}
+	
+	
+	/**
+	 * @return the panelTareas
+	 */
+	public PanelTareas getPanelTareas() {
+		return panelTareas;
+	}
+
+	/**
+	 * @param panelTareas the panelTareas to set
+	 */
+	public void setPanelTareas(PanelTareas panelTareas) {
+		this.panelTareas = panelTareas;
 	}
 
 	/**

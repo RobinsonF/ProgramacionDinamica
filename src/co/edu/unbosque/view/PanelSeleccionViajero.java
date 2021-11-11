@@ -1,11 +1,13 @@
 package co.edu.unbosque.view;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class PanelSeleccionViajero extends JPanel {
 
@@ -17,8 +19,11 @@ public class PanelSeleccionViajero extends JPanel {
 
 	public PanelSeleccionViajero() {
 		setLayout(new GridLayout(3, 1));
+		Font font = new Font("SansSerif", Font.BOLD, 30);
 		labelNumCiudad = new JLabel("Ingrese el número de ciudades");
 		txtNumCiudad = new JTextField();
+		txtNumCiudad.setFont(font);
+		txtNumCiudad.setHorizontalAlignment(SwingConstants.CENTER);
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setActionCommand(COMANDO_CONFIRMAR);
 		add(labelNumCiudad);

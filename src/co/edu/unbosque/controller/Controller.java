@@ -41,7 +41,7 @@ public class Controller implements ActionListener {
 			vista.getSplitPane().setRightComponent(vista.getPanelProductoMatriz());
 		}
 		if (comando.equals(vista.getPanelBotones().getCOMANDO_TAREAS())) {
-			System.out.println("Tareas");
+			vista.getSplitPane().setRightComponent(vista.getPanelTareas());
 		}
 		if (comando.equals(vista.getPanelBotones().getCOMANDO_BINOMIO())) {
 			vista.getSplitPane().setRightComponent(vista.getPanelCoeficienteBinomial());
@@ -62,34 +62,42 @@ public class Controller implements ActionListener {
 					algoritmo.verificarNumero(entradas[1]);
 					int cantidadCiudades = Integer.parseInt(entradas[1]);
 					String[] nombreCiudades = new String[cantidadCiudades + 1];
+					boolean verificar = true;
 					int i = 1;
 					while (i <= cantidadCiudades) {
 						nombreCiudades[i] = vista.pedirDato("Ingrese el nombre de la ciudad numero: " + i);
+						if (nombreCiudades[i].equals("Accion Cancelada")) {
+							vista.mostrarMensajeInformacion(nombreCiudades[i]);
+							verificar = false;
+							break;
+						}
 						i++;
 					}
-					vista.getPanelViajero().getPanelMatriz().inicializarCompentes(cantidadCiudades + 1,
-							cantidadCiudades + 1);
-					JTextField[][] matriz = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
-					matriz[0][0].setEnabled(false);
-					for (int j = 1; j < cantidadCiudades + 1; j++) {
-						matriz[0][j].setText(nombreCiudades[j]);
-						matriz[0][j].setEnabled(false);
-					}
-					for (int j = 1; j < cantidadCiudades + 1; j++) {
-						matriz[j][0].setText(nombreCiudades[j]);
-						matriz[j][0].setEnabled(false);
-					}
-					for (int i2 = 1; i2 < cantidadCiudades + 1; i2++) {
-						for (int j = 1; j < matriz.length; j++) {
-							if (i2 == j) {
-								matriz[i2][j].setText("0");
-								matriz[i2][j].setEnabled(false);
-							}
-
+					if (verificar) {
+						vista.getPanelViajero().getPanelMatriz().inicializarCompentes(cantidadCiudades + 1,
+								cantidadCiudades + 1);
+						JTextField[][] matriz = vista.getPanelViajero().getPanelMatriz().getTxtMatriz();
+						matriz[0][0].setEnabled(false);
+						for (int j = 1; j < cantidadCiudades + 1; j++) {
+							matriz[0][j].setText(nombreCiudades[j]);
+							matriz[0][j].setEnabled(false);
 						}
+						for (int j = 1; j < cantidadCiudades + 1; j++) {
+							matriz[j][0].setText(nombreCiudades[j]);
+							matriz[j][0].setEnabled(false);
+						}
+						for (int i2 = 1; i2 < cantidadCiudades + 1; i2++) {
+							for (int j = 1; j < matriz.length; j++) {
+								if (i2 == j) {
+									matriz[i2][j].setText("0");
+									matriz[i2][j].setEnabled(false);
+								}
+
+							}
+						}
+						vista.getPanelViajero().getPanelMatriz().setTxtMatriz(matriz);
+						vista.getPanelViajero().getSplitPane().setRightComponent(vista.getPanelViajero().getPanel());
 					}
-					vista.getPanelViajero().getPanelMatriz().setTxtMatriz(matriz);
-					vista.getPanelViajero().getSplitPane().setRightComponent(vista.getPanelViajero().getPanel());
 				} else {
 					vista.mostrarMensajeInformacion(entradas[1]);
 				}
@@ -151,6 +159,10 @@ public class Controller implements ActionListener {
 			hallarViajero();
 		}
 
+		if (comando.equals(vista.getPanelTareas().getCOMANDO_CONFIRMAR())) {
+			hallarTareas();
+		}
+
 	}
 
 	public void hallarProducto() {
@@ -164,9 +176,9 @@ public class Controller implements ActionListener {
 				int k = 0;
 				while (k < numMatriz) {
 					filas[k] = Integer
-							.parseInt(vista.pedirDato("Ingrese el número de filas de la matriz numero " + (k + 1)));
+							.parseInt(vista.pedirDato("Ingrese el nÃºmero de filas de la matriz numero " + (k + 1)));
 					columnas[k] = Integer
-							.parseInt(vista.pedirDato("Ingrese el número de columnas de la matriz numero " + (k + 1)));
+							.parseInt(vista.pedirDato("Ingrese el nÃºmero de columnas de la matriz numero " + (k + 1)));
 					k++;
 				}
 			} else {
@@ -181,7 +193,7 @@ public class Controller implements ActionListener {
 	public void hallarFloyd() {
 
 		try {
-			if (!"".equals(vista.getPanelViajero().getPanelSeleccionViajero().getTxtNumCiudad().getText())) {
+			if (!"".equals(vista.getPanelFloyd().getPanelSeleccionFloyd().getTxtNumNodos().getText())) {
 				JTextField matriz[][] = vista.getPanelFloyd().getPanelMatriz().getTxtMatriz();
 				int matrizRecorridos[][] = new int[matriz.length - 1][matriz.length - 1];
 				for (int i = 1; i < matriz.length; i++) {
@@ -201,69 +213,56 @@ public class Controller implements ActionListener {
 						}
 					}
 				}
-
-				boolean v = false;
-				int inicio = 0;
-				int fin = 0;
-				do {
-					String inicio2 = vista.pedirDato("Ingrese el punto de partida: ");
-					if (!"Accion Cancelada".equals(inicio2)) {
-						if (!"Por favor digite un valor".equals(inicio2)) {
-							algoritmo.verificarNumero(inicio2);
-							inicio = Integer.parseInt(inicio2);
-							if (inicio <= (matriz.length - 1) && inicio >= 1) {
-								v = true;
-							}
-							if (!v) {
-								vista.mostrarMensajeInformacion("El punto de partida registrado no existe");
-							}
-						}
-					} else {
-						vista.mostrarMensajeInformacion(inicio2);
-						break;
-					}
-				} while (!v);
-
-				if (v) {
-					v = false;
-
-					do {
-						String fin2 = vista.pedirDato("Ingrese el punto final: ");
-						if (!"Accion Cancelada".equals(fin2)) {
-							if (!"Por favor digite un valor".equals(fin2)) {
-								algoritmo.verificarNumero(fin2);
-								fin = Integer.parseInt(fin2);
-								if (fin <= (matriz.length - 1) && fin >= 1) {
-									v = true;
-								}
-								if (!v) {
-									vista.mostrarMensajeInformacion("El punto final registrado no existe");
-								}
-							}
-						} else {
-							vista.mostrarMensajeInformacion(fin2);
-							break;
-						}
-					} while (!v);
+				int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
+				vista.getPanelFloyd().getPanelMatriz1().limpiarPanel();
+				vista.getPanelFloyd().getPanelMatriz1().inicializarCompentes2(matrizRecorridos.length + 1,
+						matrizRecorridos.length + 1);
+				JLabel[][] matrizResultante = vista.getPanelFloyd().getPanelMatriz1().getLabelMatriz();
+				Font font = new Font("SansSerif", Font.BOLD, 30);
+				for (int i = 1; i < matrizResultante.length; i++) {
+					matrizResultante[0][i].setText("" + i);
+					matrizResultante[0][i].setBorder(BorderFactory.createLineBorder(new Color(5, 5, 5)));
+					matrizResultante[0][i].setFont(font);
+					matrizResultante[0][i].setForeground(Color.red);
+					matrizResultante[0][i].setHorizontalAlignment(SwingConstants.CENTER);
+					matrizResultante[0][i].setVerticalAlignment(SwingConstants.CENTER);
 				}
-
-				if (v) {
-
-					if (inicio == fin) {
-						vista.mostrarMensajeAdvertencia(
-								"El recorrido es 0 porque el nodo de inicio y el nodo final son el mismo.");
-					} else {
-						int matrizRecorridosCortos[][] = algoritmo.rutasCortas(matrizRecorridos);
-						if (matrizRecorridosCortos[inicio - 1][fin - 1] == 99999999) {
-							vista.mostrarMensajeError("Los nodos no cuentan con algún camino que los una.");
+				for (int i = 1; i < matrizResultante.length; i++) {
+					matrizResultante[i][0].setText("" + i);
+					matrizResultante[i][0].setBorder(BorderFactory.createLineBorder(new Color(5, 5, 5)));
+					matrizResultante[i][0].setFont(font);
+					matrizResultante[i][0].setForeground(Color.red);
+					matrizResultante[i][0].setHorizontalAlignment(SwingConstants.CENTER);
+					matrizResultante[i][0].setVerticalAlignment(SwingConstants.CENTER);
+				}
+				for (int i = 1; i < matrizResultante.length; i++) {
+					for (int j = 1; j < matrizResultante.length; j++) {
+						if (i == j) {
+							matrizResultante[i][j].setText("-");
+							matrizResultante[i][j].setBorder(BorderFactory.createLineBorder(new Color(5, 5, 5)));
+							matrizResultante[i][j].setFont(font);
+							matrizResultante[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+							matrizResultante[i][j].setVerticalAlignment(SwingConstants.CENTER);
+						} else if (matrizRecorridosCortos[i - 1][j - 1] == 99999999) {
+							matrizResultante[i][j].setText("âˆž");
+							matrizResultante[i][j].setBorder(BorderFactory.createLineBorder(new Color(5, 5, 5)));
+							matrizResultante[i][j].setFont(font);
+							matrizResultante[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+							matrizResultante[i][j].setVerticalAlignment(SwingConstants.CENTER);
 						} else {
-							vista.mostrarMensajeInformacion("El recorrido mas corto del punto " + inicio + " al punto "
-									+ fin + " es: " + matrizRecorridosCortos[inicio - 1][fin - 1]);
+							matrizResultante[i][j].setText("" + matrizRecorridosCortos[i - 1][j - 1]);
+							matrizResultante[i][j].setBorder(BorderFactory.createLineBorder(new Color(5, 5, 5)));
+							matrizResultante[i][j].setFont(font);
+							matrizResultante[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+							matrizResultante[i][j].setVerticalAlignment(SwingConstants.CENTER);
 						}
 					}
 				}
+				vista.getPanelFloyd().getSplitPane().setRightComponent(vista.getPanelFloyd().getPanelMatriz1());
+				vista.getPanelFloyd().getPanelMatriz1().setLabelMatriz(matrizResultante);
+
 			} else {
-				vista.mostrarMensajeInformacion("Ingrese el número de nodos");
+				vista.mostrarMensajeInformacion("Ingrese el nÃºmero de nodos");
 			}
 
 		} catch (ExcepcionNumero excepcion) {
@@ -308,7 +307,7 @@ public class Controller implements ActionListener {
 				}
 				vista.mostrarMensajeInformacion("Mejor ruta " + camino);
 			} else {
-				vista.mostrarMensajeInformacion("Ingrese el número de ciudades");
+				vista.mostrarMensajeInformacion("Ingrese el nÃºmero de ciudades");
 			}
 		} catch (ExcepcionNumero excepcion) {
 			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
@@ -336,6 +335,46 @@ public class Controller implements ActionListener {
 			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 		} catch (Exception excepcion2) {
 			vista.mostrarMensajeError("Lo siento se ha presentado un error");
+		}
+	}
+
+	public void hallarTareas() {
+		try {
+			String[] entradas = vista.getPanelTareas().verificarEntradas();
+			if (entradas[0].equals("0")) {
+				algoritmo.verificarNumero(entradas[1]);
+				algoritmo.verificarNumero(entradas[2]);
+				int dias = Integer.parseInt(entradas[1]);
+				int tareas = Integer.parseInt(entradas[2]);
+				String[] tareasAlta = new String[tareas];
+				String[] tareasBaja = new String[tareas];
+				boolean verificar = true;
+				int k = 0;
+				while (k < tareas) {
+					tareasAlta[k] = vista.pedirDato("Ingrese el peso de la tarea de alto esfuezo nÃºmero " + (k + 1));
+					algoritmo.verificarNumero(tareasAlta[k]);
+					if (tareasAlta[k].equals("Accion Cancelada")) {
+						vista.mostrarMensajeInformacion(tareasAlta[k]);
+						verificar = false;
+						break;
+					}
+					tareasBaja[k] = vista.pedirDato("Ingrese el peso de la tarea de bajo esfuezo nÃºmero " + (k + 1));
+					algoritmo.verificarNumero(tareasBaja[k]);
+					if (tareasBaja[k].equals("Accion Cancelada")) {
+						vista.mostrarMensajeInformacion(tareasBaja[k]);
+						verificar = false;
+						break;
+					}
+					k++;
+				}
+				if(verificar) {
+					
+				}
+			} else {
+				vista.mostrarMensajeAdvertencia(entradas[1]);
+			}
+		} catch (ExcepcionNumero excepcion) {
+			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 		}
 	}
 
