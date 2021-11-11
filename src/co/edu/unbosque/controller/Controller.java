@@ -171,16 +171,43 @@ public class Controller implements ActionListener {
 			if (entradas[0].equals("0")) {
 				algoritmo.verificarNumero(entradas[1]);
 				int numMatriz = Integer.parseInt(entradas[1]);
-				int[] filas = new int[numMatriz];
+				int[] filas = new int[numMatriz + 1];
 				int[] columnas = new int[numMatriz];
 				int k = 0;
+				boolean verificar = true;
 				while (k < numMatriz) {
-					filas[k] = Integer
-							.parseInt(vista.pedirDato("Ingrese el número de filas de la matriz numero " + (k + 1)));
-					columnas[k] = Integer
-							.parseInt(vista.pedirDato("Ingrese el número de columnas de la matriz numero " + (k + 1)));
+					entradas[0] = vista.pedirDato("Ingrese el número de filas de la matriz numero " + (k + 1));
+					algoritmo.verificarNumero(entradas[0]);
+					if (entradas[0].equals("Accion Cancelada")) {
+						vista.mostrarMensajeInformacion(entradas[0]);
+						verificar = false;
+						break;
+					}
+					filas[k] = Integer.parseInt(entradas[0]);
+					entradas[0] = vista.pedirDato("Ingrese el número de columnas de la matriz numero " + (k + 1));
+					algoritmo.verificarNumero(entradas[0]);
+					if (entradas[0].equals("Accion Cancelada")) {
+						vista.mostrarMensajeInformacion(entradas[0]);
+						verificar = false;
+						break;
+					}
+					columnas[k] = Integer.parseInt(entradas[0]);
 					k++;
 				}
+
+				if (verificar) {
+
+					filas[columnas.length] = columnas[columnas.length - 1];
+					int[][] m = new int[filas.length][filas.length];
+					int[][] s = new int[filas.length][filas.length];
+					int resultado = algoritmo.matrixChain(filas, m, s);
+					String mensaje = "";
+					mensaje = algoritmo.traceback(1, filas.length - 1, s, mensaje);
+
+					vista.mostrarMensajeAdvertencia("El numero de operaciones mas óptimo es: " + resultado
+							+ "\nLa forma de multiplicar las matrices es: " + mensaje);
+				}
+
 			} else {
 				vista.mostrarMensajeAdvertencia(entradas[1]);
 			}
@@ -299,13 +326,18 @@ public class Controller implements ActionListener {
 
 				Vendedor vendedor = new Vendedor(matrizRecorridos, ciudades.length - 1, Estimacion.AJUSTADA);
 				vendedor.inciaVenta();
-				vista.mostrarMensajeInformacion("Coste mejor " + vendedor.getCosteMejor());
-				String camino = "";
-				String[] solucionMejor = vendedor.getSolMejor().split(",");
-				for (int i = 0; i < solucionMejor.length; i++) {
-					camino += ciudades[Integer.parseInt(solucionMejor[i]) + 1] + ",";
+				if (vendedor.getCosteMejor() < 99999999) {
+					vista.mostrarMensajeInformacion("Coste mejor " + vendedor.getCosteMejor());
+					String camino = "";
+					String[] solucionMejor = vendedor.getSolMejor().split(",");
+					for (int i = 0; i < solucionMejor.length; i++) {
+						camino += ciudades[Integer.parseInt(solucionMejor[i]) + 1] + ",";
+					}
+					vista.mostrarMensajeInformacion("Mejor ruta " + camino);
+				} else {
+					vista.mostrarMensajeInformacion("No es posible calcular la ruta");
 				}
-				vista.mostrarMensajeInformacion("Mejor ruta " + camino);
+
 			} else {
 				vista.mostrarMensajeInformacion("Ingrese el número de ciudades");
 			}
@@ -346,29 +378,38 @@ public class Controller implements ActionListener {
 				algoritmo.verificarNumero(entradas[2]);
 				int dias = Integer.parseInt(entradas[1]);
 				int tareas = Integer.parseInt(entradas[2]);
-				String[] tareasAlta = new String[tareas];
-				String[] tareasBaja = new String[tareas];
+				int[] tareasAlta = new int[tareas];
+				int[] tareasBaja = new int[tareas];
 				boolean verificar = true;
 				int k = 0;
 				while (k < tareas) {
-					tareasAlta[k] = vista.pedirDato("Ingrese el peso de la tarea de alto esfuezo número " + (k + 1));
-					algoritmo.verificarNumero(tareasAlta[k]);
-					if (tareasAlta[k].equals("Accion Cancelada")) {
-						vista.mostrarMensajeInformacion(tareasAlta[k]);
+					entradas[0] = vista.pedirDato("Ingrese el peso de la tarea de alto esfuezo número " + (k + 1));
+					algoritmo.verificarNumero(entradas[0]);
+					if (entradas[0].equals("Accion Cancelada")) {
+						vista.mostrarMensajeInformacion(entradas[0]);
 						verificar = false;
 						break;
 					}
-					tareasBaja[k] = vista.pedirDato("Ingrese el peso de la tarea de bajo esfuezo número " + (k + 1));
-					algoritmo.verificarNumero(tareasBaja[k]);
-					if (tareasBaja[k].equals("Accion Cancelada")) {
-						vista.mostrarMensajeInformacion(tareasBaja[k]);
-						verificar = false;
-						break;
-					}
+					tareasAlta[k] = Integer.parseInt(entradas[0]);
 					k++;
 				}
-				if(verificar) {
-					
+				k = 0;
+				while (k < tareas) {
+					entradas[0] = vista.pedirDato("Ingrese el peso de la tarea de bajo esfuezo número " + (k + 1));
+					algoritmo.verificarNumero(entradas[0]);
+					if (entradas[0].equals("Accion Cancelada")) {
+						vista.mostrarMensajeInformacion(entradas[0]);
+						verificar = false;
+						break;
+					}
+					tareasBaja[k] = Integer.parseInt(entradas[0]);
+					k++;
+				}
+				if (verificar) {
+
+					int resultado = algoritmo.asigTareasf(tareasAlta, tareasBaja, dias);
+					vista.mostrarMensajeAdvertencia(
+							"El numero de tareas optimo que se pueden realizar en " + dias + " dias es: " + resultado);
 				}
 			} else {
 				vista.mostrarMensajeAdvertencia(entradas[1]);
