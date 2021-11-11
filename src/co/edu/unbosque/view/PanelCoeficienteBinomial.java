@@ -1,3 +1,6 @@
+/**
+ * Paquete vista
+ */
 package co.edu.unbosque.view;
 
 import java.awt.Font;
@@ -8,7 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+/**
+ * 
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
+ *
+ */
 public class PanelCoeficienteBinomial extends JPanel {
 
 	private final String COMANDO_CB = "CB";

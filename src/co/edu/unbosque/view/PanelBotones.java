@@ -1,3 +1,6 @@
+/**
+ * Paquete vista
+ */
 package co.edu.unbosque.view;
 
 import java.awt.GridLayout;
@@ -5,6 +8,12 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
+ *
+ */
 public class PanelBotones extends JPanel {
 
 	private final String COMANDO_FLOYD = "FLOYD";

@@ -1,3 +1,6 @@
+/**
+ * Paquete vista
+ */
 package co.edu.unbosque.view;
 
 import java.awt.Font;
@@ -9,7 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+/**
+ * 
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
+ *
+ */
 public class PanelProductoMatriz extends JPanel {
 
 	private final String COMANDO_CONFIRMAR = "CONFIRMAR2";

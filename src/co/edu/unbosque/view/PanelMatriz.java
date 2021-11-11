@@ -12,8 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 /**
  * 
- * @author Jhoan Ricardo Cuevas Patinio, Robinson Jose Gutierrez Solano and Juan
- *         Felipe Rojas Rodriguez
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
  *
  */
 public class PanelMatriz extends JPanel {

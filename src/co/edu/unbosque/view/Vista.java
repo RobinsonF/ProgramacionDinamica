@@ -1,3 +1,6 @@
+/**
+ * Paquete vista
+ */
 package co.edu.unbosque.view;
 
 import javax.swing.JFrame;
@@ -6,7 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import co.edu.unbosque.controller.Controller;
-
+/**
+ * 
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
+ *
+ */
 public class Vista extends JFrame {
 
 	private PanelBotones panelBotones;
