@@ -21,13 +21,18 @@ public class Controller implements ActionListener {
 
 	private Vista vista;
 	private Algoritmo algoritmo;
-
+	
+/**
+ * Constructor de la clase controller.
+ */
 	public Controller() {
 		vista = new Vista(this);
 		algoritmo = new Algoritmo();
 	}
 
-	@Override
+	/**
+	 * Se encarga de asignar los oyentes.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 
@@ -165,7 +170,11 @@ public class Controller implements ActionListener {
 
 	}
 	
-
+	/**
+	 * Se encarga de obtener la forma más óptima de efectuar las multiplicaciones de las matrices teniendo
+	 * en cuenta el número de procesos a realizar.
+	 */
+	
 	public void hallarProducto() {
 		try {
 			String[] entradas = vista.getPanelProductoMatriz().verificarEntradas();
@@ -217,6 +226,10 @@ public class Controller implements ActionListener {
 			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 		}
 	}
+	
+	/**
+	 * Busca hallar una matriz con los recorridos más cortos entre todos los nodos de un grafo,
+	 */
 
 	public void hallarFloyd() {
 
@@ -297,6 +310,11 @@ public class Controller implements ActionListener {
 			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 		}
 	}
+	
+	/**
+	 * Se encarga de hallar la forma más optima de recorrer un grafo y que dicho recorrido
+	 * Inicie y finalice en el mismo nodo.
+	 */
 
 	public void hallarViajero() {
 		try {
@@ -346,6 +364,10 @@ public class Controller implements ActionListener {
 			vista.mostrarMensajeAdvertencia(excepcion.getMessage());
 		}
 	}
+	
+	/**
+	 * Determina el número de subconjuntos de tamaño k que se pueden crear a partir de un conjunto n
+	 */
 
 	public void hallarCoeficienteBinomial() {
 
@@ -370,6 +392,10 @@ public class Controller implements ActionListener {
 			vista.mostrarMensajeError("Lo siento se ha presentado un error");
 		}
 	}
+	
+	/**
+	 * consiste en representar el número más óptimo de tareas que se pueden realizar en n días.
+	 */
 
 	public void hallarTareas() {
 		try {
