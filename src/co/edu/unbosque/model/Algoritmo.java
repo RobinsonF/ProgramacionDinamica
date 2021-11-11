@@ -8,6 +8,11 @@ public class Algoritmo {
 
 //----------------------------------------FLOYD-----------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
+	/**
+	 * A partir de una matriz de recorridos, halla una matriz con las rutas mas cortas entre todos los nodos.
+	 * @param matrizRecorridos: matriz con los valores de la distancia entre los nodos.
+	 * @return devuelve la matriz con los recorridos más cortos entre todos los nodos.
+	 */
 	public int[][] rutasCortas(int[][] matrizRecorridos) {
 		int n = matrizRecorridos.length;
 		for (int k = 0; k < n; k++) {

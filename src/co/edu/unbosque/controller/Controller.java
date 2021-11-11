@@ -164,6 +164,7 @@ public class Controller implements ActionListener {
 		}
 
 	}
+	
 
 	public void hallarProducto() {
 		try {
