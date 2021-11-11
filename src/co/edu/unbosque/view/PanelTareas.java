@@ -20,6 +20,9 @@ public class PanelTareas extends JPanel {
 	private JButton btnConfirmar;
 	private JPanel panel;
 
+	/**
+	 * Este método se encarga de inicializar todos los componentes del panel.
+	 */
 	public PanelTareas() {
 		setLayout(new GridLayout(2, 1));
 		Font font = new Font("SansSerif", Font.BOLD, 30);
@@ -45,6 +48,11 @@ public class PanelTareas extends JPanel {
 		add(btnConfirmar);
 	}
 
+	/**
+	 * Este método se encarga de verificar las entradas obtenidas. 
+	 * @return, retorna las entradas validadas o con su respectivo mensaje de
+	 * advertencia.
+	 */
 	public String[] verificarEntradas() {
 		String[] salidas = new String[3];
 		salidas[0] = "0";

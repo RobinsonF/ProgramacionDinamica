@@ -17,6 +17,9 @@ public class PanelSeleccionFloyd extends JPanel{
 	private JTextField txtNumNodos;
 	private JButton btnConfirmar;
 	
+	/**
+	 * Este método se encarga de inicializar todos los componentes del panel.
+	 */
 	public PanelSeleccionFloyd() {
 		setLayout(new GridLayout(3, 1));
 		Font font = new Font("SansSerif", Font.BOLD, 30);
@@ -31,6 +34,11 @@ public class PanelSeleccionFloyd extends JPanel{
 		add(btnConfirmar);
 	}
 	
+	/**
+	 * Este método se encarga de verificar las entradas obtenidas. 
+	 * @return, retorna las entradas validadas o con su respectivo mensaje de
+	 * advertencia.
+	 */
 	public String[] verificarEntradas() {
 		String[] salidas = new String[2];
 		salidas[0] = "0";

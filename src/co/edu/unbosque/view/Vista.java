@@ -25,6 +25,9 @@ public class Vista extends JFrame {
 
 	private JPanel panel;
 
+	/**
+	 * Este método se encarga de inicializar todos los componentes del panel.
+	 */
 	public Vista(Controller controller) {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(900, 400);
@@ -48,6 +51,10 @@ public class Vista extends JFrame {
 		revalidate();
 	}
 
+	/**
+	 * Método encargado de asignar los oyentes a los botones.
+	 * @param controller es la clase controlador
+	 */
 	public void asignarOyentes(Controller controller) {
 		panelBotones.getBtnFloyd().addActionListener(controller);
 		panelBotones.getBtnViajero().addActionListener(controller);
@@ -64,18 +71,35 @@ public class Vista extends JFrame {
 
 	}
 	
+	/**
+	 * Método encargado de mostrar un mensaje de advertencia.
+	 * @param mensaje
+	 */
 	public void mostrarMensajeAdvertencia(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Mensaje de advertencia", JOptionPane.WARNING_MESSAGE);
 	}
 
+	/**
+	 * Método encargado de mostrar un mensaje informativo.
+	 * @param mensaje
+	 */
 	public void mostrarMensajeInformacion(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * Método encargado de mostrar un mensaje de error.
+	 * @param mensaje
+	 */
 	public void mostrarMensajeError(String mensaje) {
 		JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * Método encargado de solicitar datos al usuario.
+	 * @param mensaje es el texto informativo acerca del dato solicitado.
+	 * @return el dato solicitado.
+	 */
 	public String pedirDato(String mensaje) {
 		String n = JOptionPane.showInputDialog(mensaje);
 		if (n == null) {

@@ -16,6 +16,9 @@ public class PanelViajero extends JPanel{
 	private JSplitPane splitPane;
 	private JPanel panel;
 	
+	/**
+	 * Este método se encarga de inicializar todos los componentes del panel.
+	 */
 	public PanelViajero() {
 		setLayout(new GridLayout(1, 1));
 		panelSeleccionViajero = new PanelSeleccionViajero();

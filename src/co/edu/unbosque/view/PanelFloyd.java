@@ -6,8 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-public class PanelFloyd extends JPanel{
-	
+public class PanelFloyd extends JPanel {
+
 	private final String COMANDO_CONFIRMAR = "CONFIRMAR7";
 
 	private PanelSeleccionFloyd panelSeleccionFloyd;
@@ -16,7 +16,10 @@ public class PanelFloyd extends JPanel{
 	private JButton btnConfirmar;
 	private JSplitPane splitPane;
 	private JPanel panel;
-	
+
+	/**
+	 * Este método se encarga de inicializar todos los componentes del panel.
+	 */
 	public PanelFloyd() {
 		setLayout(new GridLayout(1, 1));
 		panelSeleccionFloyd = new PanelSeleccionFloyd();
@@ -33,7 +36,7 @@ public class PanelFloyd extends JPanel{
 		splitPane.setRightComponent(panel);
 		add(splitPane);
 	}
-	
+
 	/**
 	 * @return the panelMatriz1
 	 */
@@ -47,8 +50,6 @@ public class PanelFloyd extends JPanel{
 	public void setPanelMatriz1(PanelMatriz panelMatriz1) {
 		this.panelMatriz1 = panelMatriz1;
 	}
-
-
 
 	/**
 	 * @return the panelSeleccionViajero
@@ -126,6 +127,5 @@ public class PanelFloyd extends JPanel{
 	public String getCOMANDO_CONFIRMAR() {
 		return COMANDO_CONFIRMAR;
 	}
-
 
 }

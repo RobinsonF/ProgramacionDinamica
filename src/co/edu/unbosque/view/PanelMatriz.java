@@ -61,6 +61,11 @@ public class PanelMatriz extends JPanel {
 		}
 	}
 	
+	/**
+	 * Este método se encarga de inicializar los componentes del panel.
+	 * @param filas, numero de filas del panel.
+	 * @param columnas, numero de columnas del panel.
+	 */
 	public void inicializarCompentes2(int filas, int columnas) {
 		setLayout(new GridLayout(filas, columnas));
 		labelMatriz = new JLabel[filas][columnas];

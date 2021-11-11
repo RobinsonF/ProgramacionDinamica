@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class PanelCoeficienteBinomial extends JPanel{
-	
+public class PanelCoeficienteBinomial extends JPanel {
+
 	private final String COMANDO_CB = "CB";
 
 	private JButton btnConfirmar;
@@ -21,9 +21,12 @@ public class PanelCoeficienteBinomial extends JPanel{
 	private JLabel labelDivisor;
 	private JTextField txtNumero2;
 	private JPanel panelAll;
-	
+
+	/**
+	 * Este método se encarga de inicializar todos los componentes del panel.
+	 */
 	public PanelCoeficienteBinomial() {
-		setLayout(new GridLayout(2,1));
+		setLayout(new GridLayout(2, 1));
 		Font font = new Font("SansSerif", Font.BOLD, 150);
 		Font font2 = new Font("SansSerif", Font.BOLD, 30);
 		labelParentesis1 = new JLabel("(");
@@ -53,17 +56,17 @@ public class PanelCoeficienteBinomial extends JPanel{
 		panel.add(txtNumero1);
 		panel.add(labelDivisor);
 		panel.add(txtNumero2);
-		panelAll.setLayout(new GridLayout(1,3));
+		panelAll.setLayout(new GridLayout(1, 3));
 		panelAll.add(labelParentesis1);
 		panelAll.add(panel);
 		panelAll.add(labelParentesis2);
 		add(panelAll);
 		add(btnConfirmar);
 	}
-	
+
 	/**
-	 * Este método se encarga de verificar las entradas de las dimensiones de la
-	 * matriz. @return, retorna las entradas validad o con su respectivo mensaje de
+	 * Este método se encarga de verificar las entradas obtenidas. 
+	 * @return, retorna las entradas validadas o con su respectivo mensaje de
 	 * advertencia.
 	 */
 	public String[] verificarEntradas() {
@@ -197,5 +200,5 @@ public class PanelCoeficienteBinomial extends JPanel{
 	public String getCOMANDO_CB() {
 		return COMANDO_CB;
 	}
-	
+
 }

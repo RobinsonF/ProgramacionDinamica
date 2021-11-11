@@ -14,6 +14,10 @@ public class PanelBotones extends JPanel {
 	private final String COMANDO_BINOMIO = "BINOMIO";
 	private JButton btnFloyd, btnViajero, btnMatrices, btnTareas, btnBinomio;
 
+	/**
+	 * Inicializa todos los botones de la parte izquierda del programa
+	 * correspondiente a la eleccion de los algoritmos. 
+	 */
 	public PanelBotones() {
 		setLayout(new GridLayout(5, 1));
 		btnFloyd = new JButton("Algoritmo de Floyd");
