@@ -1,9 +1,8 @@
-package co.edu.unbosque.model;
 /**
- * 
- * @author Eddy Cuizaguana Cerpa
- *
+ * Paquete modelo
  */
+package co.edu.unbosque.model;
+
 public enum Estimacion {
 	AJUSTADA,
 	MUYAJUSTADA
