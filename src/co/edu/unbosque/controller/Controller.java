@@ -285,14 +285,14 @@ public class Controller implements ActionListener {
 							algoritmo.verificarNumero(matriz[i][j].getText());
 							matrizRecorridos[i - 1][j - 1] = Integer.parseInt(matriz[i][j].getText());
 						} else {
-							matrizRecorridos[i - 1][j - 1] = 0;
+							matrizRecorridos[i - 1][j - 1] = Integer.MAX_VALUE;
 						}
 					}
 				}
 				for (int i = 0; i < matrizRecorridos.length; i++) {
 					for (int j = 0; j < matrizRecorridos.length; j++) {
 						if (i != j && matrizRecorridos[i][j] == 0) {
-							matrizRecorridos[i][j] = 99999999;
+							matrizRecorridos[i][j] = Integer.MAX_VALUE;
 						}
 					}
 				}
