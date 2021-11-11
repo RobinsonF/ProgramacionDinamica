@@ -1,7 +1,19 @@
+/**
+ * Paquete modelo
+ */
 package co.edu.unbosque.model;
 
+/**
+ * 
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
+ *
+ */
 public class Algoritmo {
 
+	/**
+	 * Constructor de la clase Algoritmo.
+	 */
 	public Algoritmo() {
 
 	}
@@ -9,9 +21,13 @@ public class Algoritmo {
 //----------------------------------------FLOYD-----------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * A partir de una matriz de recorridos, halla una matriz con las rutas mas cortas entre todos los nodos.
-	 * @param matrizRecorridos: matriz con los valores de la distancia entre los nodos.
-	 * @return devuelve la matriz con los recorridos más cortos entre todos los nodos.
+	 * A partir de una matriz de recorridos, halla una matriz con las rutas mas
+	 * cortas entre todos los nodos.
+	 * 
+	 * @param matrizRecorridos: matriz con los valores de la distancia entre los
+	 *                          nodos.
+	 * @return devuelve la matriz con los recorridos más cortos entre todos los
+	 *         nodos.
 	 */
 	public int[][] rutasCortas(int[][] matrizRecorridos) {
 		int n = matrizRecorridos.length;
@@ -32,6 +48,15 @@ public class Algoritmo {
 //----------------------------------------ASIGNACIÓN DE TAREAS-----------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 
+	/**
+	 * Método encargado de representar el número más óptimo de tareas que se pueden
+	 * realizar en n días.
+	 * 
+	 * @param high son los pesos de las tareas de alto esfuerzo.
+	 * @param low  son los pesos de las tareas de bajo esfuerzo.
+	 * @param n    son los días en que se van a realizar las tareas.
+	 * @return el numero de de tareas que se pueden realizar en los n días.
+	 */
 	public int asigTareasf(int[] high, int[] low, int n) {
 
 		int[] task_dp = new int[n + 1];
@@ -48,6 +73,15 @@ public class Algoritmo {
 //----------------------------------------COEFICIENTES BINOMIALES--------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 
+	/**
+	 * Metodo encargado de determinar el número de subconjuntos de tamaño k que se
+	 * pueden crear a partir de un conjunto n.
+	 * 
+	 * @param n es el tamaño del conjunto base.
+	 * @param k es el tamaño que deberán tener los subconjuntos.
+	 * @return el número de subconjuntos de tamaño k que se pueden crear a partir de
+	 *         un conjunto n.
+	 */
 	public int coefBin(int n, int k) {
 		int i, j;
 		int[][] tabla = new int[n + 1][n + 1];
@@ -137,6 +171,12 @@ public class Algoritmo {
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 
+	/**
+	 * Metodo encargado de determinar si la cadena contiene solo valores numericos.
+	 * 
+	 * @param numero es la cadena a filtrar.
+	 * @return valor falso o verdadero
+	 */
 	public boolean soloNumeros(String numero) {
 		for (int i = 0; i < numero.length(); i++) {
 			char aux = numero.charAt(i);
@@ -148,6 +188,12 @@ public class Algoritmo {
 		return true;
 	}
 
+	/**
+	 * Metodo encargado de determinar si la cadena contiene solo valores numericos.
+	 * 
+	 * @param numero es la cadena a filtrar.
+	 * @return valor falso o verdadero
+	 */
 	public boolean soloNumeros2(String numero) {
 		for (int i = 0; i < numero.length(); i++) {
 			char aux = numero.charAt(i);
@@ -159,12 +205,24 @@ public class Algoritmo {
 		return true;
 	}
 
+	/**
+	 * Método encargado de determinar si la cadena contiene solo valores numéricos.
+	 * 
+	 * @param número es la cadena a filtrar.
+	 * @throws ExcepcionNumero devuelve mensaje de la excepción.
+	 */
 	public void verificarNumero2(String numero) throws ExcepcionNumero {
 		if (!soloNumeros2(numero)) {
 			throw new ExcepcionNumero("Caracter Invalido");
 		}
 	}
 
+	/**
+	 * Método encargado de determinar si la cadena contiene solo valores numéricos.
+	 * 
+	 * @param número es la cadena a filtrar.
+	 * @throws ExcepcionNumero devuelve mensaje de la excepción.
+	 */
 	public void verificarNumero(String numero) throws ExcepcionNumero {
 		if (!soloNumeros(numero)) {
 			throw new ExcepcionNumero("Caracter Invalido");

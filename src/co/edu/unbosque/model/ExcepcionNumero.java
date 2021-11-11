@@ -5,8 +5,8 @@ package co.edu.unbosque.model;
 
 /**
  * 
- * @author Jhoan Ricardo Cuevas Patinio, Robinson Jose Gutierrez Solano and Juan
- *         Felipe Rojas Rodriguez
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
  *
  */
 public class ExcepcionNumero extends Exception{

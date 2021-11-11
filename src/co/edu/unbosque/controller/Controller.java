@@ -1,3 +1,6 @@
+/**
+ * Paquete controller
+ */
 package co.edu.unbosque.controller;
 
 import java.awt.Color;
@@ -17,6 +20,12 @@ import co.edu.unbosque.model.Vendedor;
 import co.edu.unbosque.view.Vista;
 import co.edu.unbosque.model.Estimacion;
 
+/**
+ * 
+ * @author Jhoan Ricardo Cuevas Paniño, Robinson José Gutiérrez Solano, Omar
+ *         Felipe Ladino Guezaguan
+ *
+ */
 public class Controller implements ActionListener {
 
 	private Vista vista;
