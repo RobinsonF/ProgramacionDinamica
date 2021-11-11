@@ -69,7 +69,7 @@ public class PanelCoeficienteBinomial extends JPanel{
 			salidas[2] = txtNumero2.getText();
 		} else {
 			salidas[0] = "1";
-			salidas[1] = "Por favor ingrese los valores del coeficiente binomial bobo setenta hijueputa";
+			salidas[1] = "Por favor ingrese los valores del coeficiente binomial";
 		}
 		return salidas;
 	}

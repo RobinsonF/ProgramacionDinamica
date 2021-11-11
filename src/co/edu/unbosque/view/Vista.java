@@ -52,8 +52,6 @@ public class Vista extends JFrame {
 		panelBotones.getBtnTareas().addActionListener(controller);
 		panelBotones.getBtnBinomio().addActionListener(controller);
 		panelProductoMatriz.getBtnConfirmar().addActionListener(controller);
-		panelProductoMatriz.getPanelSeleccion().getBtnConfirmar().addActionListener(controller);
-		panelProductoMatriz.getPanelSeleccion2().getBtnConfirmar2().addActionListener(controller);
 		panelCoeficienteBinomial.getBtnConfirmar().addActionListener(controller);
 		panelViajero.getPanelSeleccionViajero().getBtnConfirmar().addActionListener(controller);
 		panelViajero.getBtnConfirmar().addActionListener(controller);
